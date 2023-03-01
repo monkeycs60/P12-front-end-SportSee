@@ -1,7 +1,17 @@
+import styled from "styled-components";
+
 const Index = () => (
-    <div>
-        <h1>Index</h1>
-    </div>
+  <IndexStyle>
+    <h1>Index</h1>
+  </IndexStyle>
 );
 
 export default Index;
+
+const IndexStyle = styled.div`
+  background-color: var(--third);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;

@@ -26,6 +26,15 @@ import Layout from "./components/Layout/Layout";
 // }
 
 const App = () => {
+  const [data, setData] = useState(null);
+    useEffect(() => {
+      async function fetchData() {
+        const dataFromBack = await getData(18);
+        setData(dataFromBack);
+      }
+      fetchData();
+    }, []);
+    console.log(data);
   return (
     <Layout>
       <Routes>
