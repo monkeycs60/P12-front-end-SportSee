@@ -28,6 +28,7 @@ const HeaderStyle = styled.header`
     justify-content: space-between;
     align-items: center;
     height: 100%;
+    padding: 0 1rem;
   }
   a {
     color: var(--third);

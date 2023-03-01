@@ -1,17 +1,17 @@
 import styled from "styled-components";
+import IndexGreetings from "../components/Layout/IndexGreetings";
 
-const Index = () => (
-  <IndexStyle>
-    <h1>Index</h1>
-  </IndexStyle>
-);
+const Index = ({ data }) => {
+  return (
+    <IndexStyle>
+      <IndexGreetings data={data} />
+    </IndexStyle>
+  );
+};
 
 export default Index;
 
 const IndexStyle = styled.div`
-  background-color: var(--third);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
+  padding: 3rem 5rem;
 `;

@@ -8,3 +8,7 @@ export async function getData(userId) {
   const response = await api.get(`/user/${userId}`);
   return response.data;
 }
+
+export const apiService = {
+  getData,
+};

@@ -36,7 +36,7 @@ const SideBarStyle = styled.div`
   flex-direction: column;
   align-items: center;
   height: calc(100vh - 100px - 0rem);
-  width: 100px;
+  width: 120px;
   position: relative;
 
   .icons-container {
@@ -56,6 +56,5 @@ const SideBarStyle = styled.div`
     font-size: 0.8rem;
     display: flex;
     align-items: center;
-
   }
 `;

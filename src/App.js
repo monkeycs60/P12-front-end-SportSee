@@ -5,41 +5,19 @@ import Index from "./pages/Index";
 import NotFoundPage from "./pages/NotFoundPage";
 import Layout from "./components/Layout/Layout";
 
-// function App() {
-//   const [data, setData] = useState(null);
-//   useEffect(() => {
-//     async function fetchData() {
-//       const dataFromBack = await getData(18);
-//       setData(dataFromBack);
-//     }
-//     fetchData();
-//   }, []);
-//   console.log(data);
-  
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//        <h1>salut à tous</h1>
-//       </header>
-//     </div>
-//   );
-// }
-
 const App = () => {
   const [data, setData] = useState(null);
-    useEffect(() => {
-      async function fetchData() {
-        const dataFromBack = await getData(18);
-        setData(dataFromBack);
-      }
-      fetchData();
-    }, []);
-    console.log(data);
+  useEffect(() => {
+    async function fetchData() {
+      const dataFromBack = await getData(18);
+      setData(dataFromBack);
+    }
+    fetchData();
+  }, []);
   return (
     <Layout>
       <Routes>
-        <Route exact path="/" element={<Index />} />
-        {/* <Route exact path="/user/:id" element={<UserIdPage />} /> */}
+        <Route exact path="/" element={<Index data={data} />} />
         <Route path="/error404" element={<NotFoundPage />} />
         <Route path="*" element={<Navigate to={"/error404"} />} />
       </Routes>
