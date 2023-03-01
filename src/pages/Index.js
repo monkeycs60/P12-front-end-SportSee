@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import IndexGreetings from "../components/Layout/IndexGreetings";
+import IndexGreetings from "../components/IndexGreetings";
 
-const Index = ({ data }) => {
+const Index = ({ dataUser }) => {
   return (
     <IndexStyle>
-      <IndexGreetings data={data} />
+      <IndexGreetings dataUser={dataUser} />
     </IndexStyle>
   );
 };

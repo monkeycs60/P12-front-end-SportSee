@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-const IndexGreetings = ({ data }) => {
-  console.log("ceci est data depuis Greetings", data);
+const IndexGreetings = ({ dataUser }) => {
+  console.log("ceci est data depuis Greetings", dataUser);
   return (
     <IndexGreetingsStyle>
       <div>
-        Bonjour <span>{data && data.data.userInfos.firstName}</span>
+        Bonjour <span>{dataUser && dataUser.data.userInfos.firstName}</span>
       </div>
       <p>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
     </IndexGreetingsStyle>
