@@ -5,7 +5,7 @@ const IndexGreetings = ({ dataUser }) => {
   return (
     <IndexGreetingsStyle>
       <div>
-        Bonjour <span>{dataUser && dataUser.data.userInfos.firstName}</span>
+        Bonjour <span>{dataUser && dataUser.firstName}</span>
       </div>
       <p>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
     </IndexGreetingsStyle>
