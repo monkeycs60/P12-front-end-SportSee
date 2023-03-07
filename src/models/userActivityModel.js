@@ -1,10 +1,9 @@
 export function reformateActivity(data) {
-    const sessions = data.sessions;
+   const sessions = data.sessions;
 
-  const reformattedData = {};
-
-  sessions.forEach((session) => {
-    reformattedData[session.day] = {
+  const reformattedData = sessions.map((session) => {
+    return {
+      day: session.day,
       kilogram: session.kilogram,
       calories: session.calories,
     };
@@ -13,9 +12,7 @@ export function reformateActivity(data) {
   return reformattedData;
 }
 export class ActivityData {
-     constructor(data) {
-    Object.keys(data).forEach((day) => {
-      this[day] = data[day];
-    });
+      constructor(data) {
+    this.sessions = data;
   }
 }

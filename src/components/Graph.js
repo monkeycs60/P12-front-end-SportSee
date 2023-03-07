@@ -9,22 +9,31 @@ const Graph = ( {
   console.log(
     "dataUserActivity", dataUserActivity
   );
+  //log le premier objet de dataUserActivity
+    console.log(
+    "dataUserActivity", dataUserAverageSession
+    );
   console.log(
     "dataUserAverageSession", dataUserAverageSession
   );
   console.log(
     "dataUserPerformance", dataUserPerformance
   );
+  console.log(
+    "dataUser21222222", dataUser
+  );
+
     return (
       <GraphStyle>
-        {/* <h1>{dataUserActivity && dataUserActivity.data.sessions[0].day}</h1> */}
-      </GraphStyle>
+<h1>
+ salut
+</h1>      </GraphStyle>
     );
     };
 
 export default Graph;
 
-const GraphStyle = styled.div`
+const GraphStyle = styled.main`
 margin: 5vh 10px;
     width: 100%;
     padding: 50px;

@@ -24,7 +24,6 @@ export async function getDataUserActivity(userId) {
   const activityData = new ActivityData(
     reformatedData
   );
-  console.log(activityData, "activityData");
   return activityData;
 }
 
