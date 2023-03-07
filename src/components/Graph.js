@@ -17,7 +17,7 @@ const Graph = ( {
   );
     return (
       <GraphStyle>
-        <h1>{dataUserActivity && dataUserActivity.data.sessions[0].day}</h1>
+        {/* <h1>{dataUserActivity && dataUserActivity.data.sessions[0].day}</h1> */}
       </GraphStyle>
     );
     };

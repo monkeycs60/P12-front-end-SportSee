@@ -1,6 +1,7 @@
 import axios from "axios";
 import { reformateUser, User } from "../models/userModel";
 import { reformatePerformance, PerformanceData } from "../models/userPerformanceModel";
+import { reformateActivity, ActivityData } from "../models/userActivityModel";
 
 const api = axios.create({
   baseURL: "http://localhost:3050",
@@ -17,7 +18,13 @@ export async function getDataUser(userId) {
 
 export async function getDataUserActivity(userId) {
   const response = await api.get(`/user/${userId}/activity`);
-  return response.data;
+  const reformatedData = reformateActivity(response.data.data);
+  console.log(reformatedData, "reformatedACTIVITY");
+  const activityData = new ActivityData(
+    reformatedData
+  );
+  console.log(activityData, "activityData");
+  return activityData;
 }
 
 export async function getDataUserAverageSession(userId) {
