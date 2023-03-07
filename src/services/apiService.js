@@ -1,5 +1,6 @@
 import axios from "axios";
 import { reformateUser, User } from "../models/userModel";
+import { reformatePerformance, PerformanceData } from "../models/userPerformanceModel";
 
 const api = axios.create({
   baseURL: "http://localhost:3050",
@@ -26,5 +27,9 @@ export async function getDataUserAverageSession(userId) {
 
 export async function getDataUserPerformance(userId) {
   const response = await api.get(`/user/${userId}/performance`);
-  return response.data;
+  const reformatedData = reformatePerformance(response.data.data);
+  const performanceData = new PerformanceData(
+    reformatedData
+  );
+  return performanceData;
 }

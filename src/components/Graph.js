@@ -6,6 +6,15 @@ const Graph = ( {
     dataUserAverageSession,
     dataUserPerformance,
 }) => {
+  console.log(
+    "dataUserActivity", dataUserActivity
+  );
+  console.log(
+    "dataUserAverageSession", dataUserAverageSession
+  );
+  console.log(
+    "dataUserPerformance", dataUserPerformance
+  );
     return (
       <GraphStyle>
         <h1>{dataUserActivity && dataUserActivity.data.sessions[0].day}</h1>
