@@ -35,8 +35,8 @@ const SideBarStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(100vh - 100px - 0rem);
-  width: 120px;
+  height: calc(100vh - 70px - 0rem);
+  width: 100px;
   position: relative;
 
   .icons-container {

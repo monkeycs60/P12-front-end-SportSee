@@ -22,7 +22,7 @@ export default Header;
 const HeaderStyle = styled.header`
   background-color: var(--primary);
   padding: 1rem;
-  height: 100px;
+  height: 70px;
   nav {
     display: flex;
     justify-content: space-between;
