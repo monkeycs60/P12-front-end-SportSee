@@ -4,6 +4,15 @@ import styled from "styled-components";
 import oval from "../../assets/Oval.svg";
 import ovalRed from "../../assets/Oval-red.svg";
 
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = String(date.getFullYear()).slice(-2);
+  return `${day}-${month}-${year}`;
+}
+
 const BarChart = ({ dataUserActivity }) => {
     console.log('====================================');
     console.log('dataUserActivity', dataUserActivity);
@@ -14,8 +23,9 @@ const BarChart = ({ dataUserActivity }) => {
   useEffect(() => {
     if (dataUserActivity && d3Container.current) {
         // We set up the svg container
-        const w = 500;
-        const h = 300;
+        const w = 460;
+        const h = 220;
+
       const svg = d3.select(d3Container.current);
         svg
         .attr("width", w)
@@ -24,12 +34,15 @@ const BarChart = ({ dataUserActivity }) => {
         .style("overflow", "visible")
         .style("fill", "yellow");
 
+        // clipath for rounded corners
+        
+
         // We set up the scales
         const xScale = d3
         .scaleBand()
-        .domain(dataUserActivity.sessions.map((d) => d.day))
+         .domain(dataUserActivity.sessions.map((d) => formatDate(d.day)))
         .range([0, w])
-        .padding(0.2);
+        .padding(0);
 
         const yScale = d3
         .scaleLinear()
@@ -42,20 +55,42 @@ const BarChart = ({ dataUserActivity }) => {
 
         // We set up the axis
         const xAxis = d3.axisBottom(xScale)
+        .tickPadding(10)
+        .tickSize(0)
+        // .tickSizeOuter(0);
         const yAxis = d3.axisRight(yScale)
-         .tickSize(w) 
-    .tickPadding(10);
-       
+        .tickSize(w - 40) 
+        .tickPadding(10);
 
-        // We set up the bars
+     // We set up the axis
         svg
+        .append("g")
+        .attr("transform", `translate(-15, ${h})`)
+        .call(xAxis);
+
+        const yAxisGroup = svg
+        .append("g")
+        .attr("transform", `translate(0, 0)`)
+        .call(yAxis);
+
+         yAxisGroup
+        .selectAll("text")
+        .attr("class", "y-axis");
+       
+        svg.selectAll("g").selectAll("line").attr("stroke", "#DEDEDE");
+        svg.selectAll("g").selectAll("line").lower();
+        svg.selectAll("g").selectAll("line")
+        .filter((d, i) => i !== 0)
+        .attr("stroke-dasharray", "2,2")
+        // We set up the bars
+      svg
         .selectAll("rect")
         .data(dataUserActivity.sessions)
         .enter()
         .append("rect")
-        .attr("x", (d) => xScale(d.day) + xScale.bandwidth() / 2)
+        .attr("x", (d) => xScale(formatDate(d.day)) + xScale.bandwidth() / 4)
         .attr("y", (d) => yScale(d.calories))
-        .attr("width", (xScale.bandwidth()) / 3)
+        .attr("width", (xScale.bandwidth()) / 8)
         .attr("height", (d) => h - yScale(d.calories))
         .attr("fill", "#E60000")
         .raise();
@@ -66,35 +101,19 @@ const BarChart = ({ dataUserActivity }) => {
         .enter()
         .append("rect")
         .attr("class", "bar")
-        .attr("x", (d) => xScale(d.day))
+        .attr("x", (d) => xScale(formatDate(d.day)))
         .attr("y", (d) => yScale(d.kilogram))
-        .attr("width", (xScale.bandwidth()) / 3)
+        .attr("width", (xScale.bandwidth()) / 8)
         .attr("height", (d) => h - yScale(d.kilogram))
         .attr("fill", "#282D30")
-        .raise();
-        // .attr("rx", 5) // set the corner radius of the bars to 5 pixels
+        .raise();     
         
-
-        // We set up the axis
-        svg
-        .append("g")
-        .attr("transform", `translate(0, ${h})`)
-        .call(xAxis);
-
-        svg
-        .append("g")
-        .attr("transform", `translate(0, 0)`)
-        .call(yAxis);
-
-
-     
-        svg.selectAll("g").selectAll("line").attr("stroke", "#DEDEDE");
-        svg.selectAll("g").selectAll("line").lower();
-        svg.selectAll("g").selectAll("line")
-        .filter((d, i) => i !== 0)
-        .attr("stroke-dasharray", "2,2")
-
-    }
+        svg.selectAll("g").selectAll("path.domain").attr("stroke", "none");
+        svg.selectAll('g').selectAll('text').attr('margin', '50px')
+svg.selectAll('.y.axis') 
+    .selectAll('text')
+  .style("fill", "#E60000")   
+ }
   }, [dataUserActivity]);
     return (
         <GraphStyle>
@@ -140,7 +159,13 @@ const GraphStyle = styled.div`
         width: 500px;
         div {
             display: flex;
+            justify-content: center;
+            align-items: center;
             gap: 10px;
+            img {
+                width: 10px;
+                height: 10px;    
+            }
         }
     }
    
