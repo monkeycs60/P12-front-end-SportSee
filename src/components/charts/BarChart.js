@@ -13,6 +13,21 @@ function formatDate(dateString) {
   return `${day}-${month}-${year}`;
 }
 
+// function for round bar corners
+        function drawRoundedBar(x, y, width, height, radius) {
+  return `
+    M${x},${y + radius}
+    a${radius},${radius} 0 0 1 ${radius},${-radius}
+    h${width - 2 * radius}
+    a${radius},${radius} 0 0 1 ${radius},${radius}
+    v${height - radius}
+    h${-width}
+    z
+  `;
+}
+
+
+
 const BarChart = ({ dataUserActivity }) => {
     console.log('====================================');
     console.log('dataUserActivity', dataUserActivity);
@@ -22,9 +37,13 @@ const BarChart = ({ dataUserActivity }) => {
 
   useEffect(() => {
     if (dataUserActivity && d3Container.current) {
+
+        
+const borderRadius = 3;
         // We set up the svg container
         const w = 460;
-        const h = 220;
+        const h = 120;
+    
 
       const svg = d3.select(d3Container.current);
         svg
@@ -60,7 +79,8 @@ const BarChart = ({ dataUserActivity }) => {
         // .tickSizeOuter(0);
         const yAxis = d3.axisRight(yScale)
         .tickSize(w - 40) 
-        .tickPadding(10);
+        .tickPadding(30)
+        .ticks(5);
 
      // We set up the axis
         svg
@@ -71,7 +91,8 @@ const BarChart = ({ dataUserActivity }) => {
         const yAxisGroup = svg
         .append("g")
         .attr("transform", `translate(0, 0)`)
-        .call(yAxis);
+        .call(yAxis)
+        .lower();
 
          yAxisGroup
         .selectAll("text")
@@ -83,30 +104,39 @@ const BarChart = ({ dataUserActivity }) => {
         .filter((d, i) => i !== 0)
         .attr("stroke-dasharray", "2,2")
         // We set up the bars
-      svg
-        .selectAll("rect")
-        .data(dataUserActivity.sessions)
-        .enter()
-        .append("rect")
-        .attr("x", (d) => xScale(formatDate(d.day)) + xScale.bandwidth() / 4)
-        .attr("y", (d) => yScale(d.calories))
-        .attr("width", (xScale.bandwidth()) / 8)
-        .attr("height", (d) => h - yScale(d.calories))
-        .attr("fill", "#E60000")
-        .raise();
+     svg
+  .selectAll(".calorie-bar")
+  .data(dataUserActivity.sessions)
+  .enter()
+  .append("path")
+  .attr("class", "calorie-bar")
+  .attr("d", (d) =>
+    drawRoundedBar(
+      xScale(formatDate(d.day)) + xScale.bandwidth() / 4,
+      yScale(d.calories),
+      xScale.bandwidth() / 8,
+      h - yScale(d.calories),
+      borderRadius
+    )
+  )
+  .attr("fill", "#E60000")
 
-        svg
-        .selectAll(".bar")
-        .data(dataUserActivity.sessions)
-        .enter()
-        .append("rect")
-        .attr("class", "bar")
-        .attr("x", (d) => xScale(formatDate(d.day)))
-        .attr("y", (d) => yScale(d.kilogram))
-        .attr("width", (xScale.bandwidth()) / 8)
-        .attr("height", (d) => h - yScale(d.kilogram))
-        .attr("fill", "#282D30")
-        .raise();     
+       svg
+  .selectAll(".bar")
+  .data(dataUserActivity.sessions)
+  .enter()
+  .append("path")
+  .attr("class", "bar")
+  .attr("d", (d) =>
+    drawRoundedBar(
+      xScale(formatDate(d.day)),
+      yScale(d.kilogram),
+      xScale.bandwidth() / 8,
+      h - yScale(d.kilogram),
+      borderRadius
+    )
+  )
+  .attr("fill", "#282D30")
         
         svg.selectAll("g").selectAll("path.domain").attr("stroke", "none");
         svg.selectAll('g').selectAll('text').attr('margin', '50px')
@@ -120,12 +150,14 @@ svg.selectAll('.y.axis')
             <div className='barchart-title'>
                 <h3>Activité quotidienne</h3>
                 <div>
+                <div>
                     <img src={oval} alt="" />
                     <p>Poids (kg)</p>
                 </div>
                 <div>
                     <img src={ovalRed} alt="" />
-                    <p>Calories brûlées</p>
+                    <p>Calories brûlées (kcal)</p>
+                </div>
                 </div>
             </div>
         
@@ -157,11 +189,17 @@ const GraphStyle = styled.div`
         display: flex;
         justify-content: space-between;
         width: 500px;
+        margin: 20px 0;
+        h3 {
+            font-size: 16px;
+        }
         div {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
+            font-size: 12px;
+            color: #282D30;
             img {
                 width: 10px;
                 height: 10px;    

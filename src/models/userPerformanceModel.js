@@ -17,7 +17,6 @@ export function reformatePerformance(data) {
 
 export class PerformanceData {
   constructor(props) {
-    this.id = props.id;
     this.cardio = props.cardio;
     this.energy = props.energy;
     this.endurance = props.endurance;

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { reformateUser, User } from "../models/userModel";
+import { reformateUserScore, UserScore } from "../models/userScoreModel";
 import { reformatePerformance, PerformanceData } from "../models/userPerformanceModel";
 import { reformateActivity, ActivityData } from "../models/userActivityModel";
 import { reformateAverageSession, SessionData } from "../models/userAverageSessionModel";
@@ -15,6 +16,15 @@ export async function getDataUser(userId) {
     reformatedData
   );
   return user;
+}
+
+export async function getDataUserScore(userId) {
+  const response = await api.get(`/user/${userId}`);
+  const reformatedData = reformateUserScore(response.data.data);
+  const userScore = new UserScore(
+    reformatedData
+  );
+  return userScore;
 }
 
 export async function getDataUserActivity(userId) {
