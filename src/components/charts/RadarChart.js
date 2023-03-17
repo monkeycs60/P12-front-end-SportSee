@@ -49,7 +49,8 @@ const RadarChart = ({ dataUserPerformance }) => {
 
 
         for (let level = 1; level <= levels; level++) {
-        const levelFactor = (radius / levels) * level;
+        const exponent = 1.4; // Adjust the exponent to change the spacing between the levels
+        const levelFactor = (radius * 0.9 / Math.pow(levels, exponent)) * Math.pow(level, exponent);
         const polygonPoints = chartData
           .map((_, i) => [
             levelFactor * Math.cos(angleSlice * i - Math.PI / 2),
@@ -100,7 +101,7 @@ const RadarChart = ({ dataUserPerformance }) => {
         .data([
           chartData.map(([label, value]) => ({
             label,
-            value: yScale(value),
+            value: yScale(value) * 0.9,
           })),
         ])
         .enter()
