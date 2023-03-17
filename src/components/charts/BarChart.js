@@ -29,9 +29,6 @@ function formatDate(dateString) {
 
 
 const BarChart = ({ dataUserActivity }) => {
-    console.log('====================================');
-    console.log('dataUserActivity', dataUserActivity);
-    console.log('====================================');
 
     const d3Container = useRef(null);
 
@@ -172,7 +169,7 @@ svg.selectAll('.y.axis')
 export default BarChart;
 
 const GraphStyle = styled.div`
-    width: 60%;
+    width: auto;
     padding: 10px 20px;
     display: flex;
     flex-direction: column;

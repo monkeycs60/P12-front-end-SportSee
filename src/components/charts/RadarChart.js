@@ -11,11 +11,22 @@ const RadarChart = ({ dataUserPerformance }) => {
         if (dataUserPerformance) {
         console.log(dataUserPerformance);
       const chartElement = chartRef.current;
-      const chartData = Object.entries(dataUserPerformance);
+      // const chartData = Object.entries(dataUserPerformance);
+ const frenchLabels = {
+            cardio: 'Cardio',
+            energy: 'Énergie',
+            endurance: 'Endurance',
+            strength: 'Force',
+            speed: 'Vitesse',
+            intensity: 'Intensité',
+          };
+        // 2. Créez un nouveau tableau avec les données traduites et triées dans l'ordre souhaité
+          const orderedKeys = ['intensity', 'speed', 'strength', 'endurance', 'energy', 'cardio'];
+          const chartData = orderedKeys.map((key) => [frenchLabels[key], dataUserPerformance[key]]);
 
-      const width = 400;
-      const height = 280;
-      const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+      const width = 300;
+      const height = 240;
+      const margin = { top: 30, right: 0, bottom: 30, left: 0 };
       const radius = Math.min(width, height) / 2;
 
       const angleSlice = (2 * Math.PI) / chartData.length;
@@ -28,8 +39,12 @@ const RadarChart = ({ dataUserPerformance }) => {
         .append('g')
         .attr(
           'transform',
-          `translate(${width / 2 + margin.left}, ${height / 2 + margin.top})`
-        );
+          `translate(${width / 2 + margin.left}, ${height / 2 + margin.top })`
+        )
+        //padding between the chart and the border
+        .attr('class', 'radar');
+
+
 
  // Add grey background
       svg
@@ -38,6 +53,8 @@ const RadarChart = ({ dataUserPerformance }) => {
         .attr('y', -(height / 2) - margin.top)
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
+        .attr('rx', 5)
+        .attr('ry', 5)
         .attr('fill', '#282D30');
 
       const maxValue = Math.max(

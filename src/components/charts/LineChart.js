@@ -97,5 +97,6 @@ export default LineChart;
 
 const StyledLineChart = styled.div`
 background-color: red;
+border-radius: 5px;
 
 `;
