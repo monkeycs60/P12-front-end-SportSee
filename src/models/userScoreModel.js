@@ -1,13 +1,13 @@
 export function reformateUserScore(data) {
-  const todayScore = data.todayScore;
+  const score = data.score;
 
   return {
-    todayScore,
+    score,
   };
 }
 
 export class UserScore {
   constructor(data) {
-    this.todayScore = data.todayScore;
+    this.score = data.score;
   }
 }

@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import BarChart from "../components/charts/BarChart";
 import LineChart from "../components/charts/LineChart";
 import RadialChart from "../components/charts/RadialChart";
+import RadarChart from "../components/charts/RadarChart";
 
 
 
@@ -49,7 +50,10 @@ const Index = () => {
       <BarChart dataUserActivity={dataUserActivity} />
       <LineChart dataUserAverageSession={dataUserAverageSession} />
       </div>
-      <RadialChart dataUserPerformance={dataUserScore} />
+      <div className="another-grid">
+      <RadialChart dataUserScore={dataUserScore} />
+      <RadarChart dataUserPerformance={dataUserPerformance} />
+      </div>
     </IndexStyle>
   );
 };
@@ -60,6 +64,9 @@ const IndexStyle = styled.div`
   width: 100%;
   padding: 10px 20px;
   .bar-grid {
+    display: flex;
+  }
+  .another-grid {
     display: flex;
   }
 `;

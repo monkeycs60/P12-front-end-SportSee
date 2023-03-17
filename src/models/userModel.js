@@ -3,7 +3,7 @@ export function reformateUser(data) {
   const firstName = data.userInfos.firstName;
   const lastName = data.userInfos.lastName;
   const age = data.userInfos.age;
-  const todayScore = data.todayScore;
+  const score = data.score;
   const calorieCount = data.keyData.calorieCount;
   const proteinCount = data.keyData.proteinCount;
   const carbohydrateCount = data.keyData.carbohydrateCount;
@@ -14,7 +14,7 @@ export function reformateUser(data) {
     firstName,
     lastName,
     age,
-    todayScore,
+    score,
     calorieCount,
     proteinCount,
     carbohydrateCount,
@@ -28,7 +28,7 @@ export class User {
     this.firstName = data.firstName;
     this.lastName = data.lastName;
     this.age = data.age;
-    this.todayScore = data.todayScore;
+    this.score = data.score;
     this.calorieCount = data.calorieCount;
     this.proteinCount = data.proteinCount;
     this.carbohydrateCount = data.carbohydrateCount;
