@@ -13,9 +13,27 @@ const LineChart = ({ dataUserAverageSession }) => {
       //this is the array of days of the week, starting by 0 = Sunday
       const dayOfWeek = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
 
+      // implement tooltip
+      const showTooltip = (event, d) => {
+  const tooltip = d3.select(d3Container.current.parentElement).select(".tooltip");
+  tooltip
+    .style("display", "inline")
+    .style("left", event.clientX + "px")
+    .style("top", event.clientY + "px")
+    .html(`Day: ${dayOfWeek[d.day % 7]}<br/>Session Length: ${d.sessionLength}`);
+     // Add the background-gradient class
+   d3.select(d3Container.current.parentElement).classed("background-gradient", true);
+};
+
+const hideTooltip = () => {
+  const tooltip = d3.select(d3Container.current.parentElement).select(".tooltip");
+  tooltip.style("display", "none");
+  // Remove the background-gradient class
+  d3.select(d3Container.current.parentElement).classed("background-gradient", false);
+};
+
+      // set the dimensions and margins of the graph
       const margin = { top: 10, right: 30, bottom: 30, left: 50 },
-        // width = 260 - margin.left - margin.right,
-        // height = 250 - margin.top - margin.bottom;
         width =  260 - margin.left - margin.right,
         height = 250 - margin.top - margin.bottom;
 
@@ -69,7 +87,7 @@ const LineChart = ({ dataUserAverageSession }) => {
         .attr('fill', 'none')
         .attr('stroke', 'white')
         .attr('stroke-width', 3)
-        .attr('d', line);
+        .attr('d', line)
 
           svg
         .append('text')
@@ -83,11 +101,26 @@ const LineChart = ({ dataUserAverageSession }) => {
 
      svg.selectAll("g").selectAll("path.domain").attr("stroke", "none");
 
+     svg
+  .selectAll(".data-point")
+  .data(sessionsArray)
+  .join("circle")
+  .attr("class", "data-point")
+  .attr("cx", d => x(d.day))
+  .attr("cy", d => y(d.sessionLength))
+  .attr("r", 20)
+  .attr("fill", "white")
+  .attr("opacity", 0) // Make the circles invisible, but still interactive
+  .on("mouseover", showTooltip)
+  .on("mousemove", showTooltip)
+  .on("mouseout", hideTooltip);
+
     }
   }, [dataUserAverageSession]);
 
   return (
     <StyledLineChart>
+      <div className="tooltip"></div>
       <svg ref={d3Container}></svg>
     </StyledLineChart>
   );
@@ -98,5 +131,17 @@ export default LineChart;
 const StyledLineChart = styled.div`
 background-color: red;
 border-radius: 5px;
-
+ .background-gradient {
+    background: linear-gradient(180deg, green 0%, #ffffff 100%);
+  }
+.tooltip {
+    position: absolute;
+    display: none;
+    background: linear-gradient(180deg, green 0%, #ffffff 100%);
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 12px;
+    color: black;
+    pointer-events: none;
+  }
 `;

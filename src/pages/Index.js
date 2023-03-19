@@ -13,7 +13,12 @@ import LineChart from "../components/charts/LineChart";
 import RadialChart from "../components/charts/RadialChart";
 import RadarChart from "../components/charts/RadarChart";
 import Nutriments from "../components/nutriments/Nutriments";
-
+import {
+  USER_MAIN_DATA,
+  USER_ACTIVITY,
+  USER_AVERAGE_SESSIONS,
+  USER_PERFORMANCE
+} from "../data/data"
 
 
 const Index = () => {
@@ -23,26 +28,46 @@ const Index = () => {
   const [dataUserPerformance, setDataUserPerformance] = useState(null);
   const [dataUserScore, setDataUserScore] = useState(null);
 
+   useEffect(() => {
+  async function fetchData() {
+    try {
+      const dataFromBack = await getDataUser(18);
+      setDataUser(dataFromBack);
+    } catch (error) {
+      setDataUser(USER_MAIN_DATA);
+      console.log(dataUser);
+    }
 
-  useEffect(() => {
-      async function fetchData() {
-        const dataFromBack = await getDataUser(18);
-        setDataUser(dataFromBack);
+    try {
+      const dataFromBackScore = await getDataUserScore(18);
+      setDataUserScore(dataFromBackScore);
+    } catch (error) {
+      setDataUserScore(USER_MAIN_DATA);
+    }
 
-        const dataFromBackScore = await getDataUserScore(18);
-        setDataUserScore(dataFromBackScore);
-  
-        const dataFromBackActivity = await getDataUserActivity(18);
-        setDataUserActivity(dataFromBackActivity);
-  
-        const dataFromBackAverageSession = await getDataUserAverageSession(18);
-        setDataUserAverageSession(dataFromBackAverageSession);
-  
-        const dataFromBackPerformance = await getDataUserPerformance(18);
-        setDataUserPerformance(dataFromBackPerformance);
-      }
-      fetchData();
-    }, []);
+    try {
+      const dataFromBackActivity = await getDataUserActivity(18);
+      setDataUserActivity(dataFromBackActivity);
+    } catch (error) {
+      setDataUserActivity(USER_ACTIVITY.find(user => user.userId === 18));
+    }
+
+    try {
+      const dataFromBackAverageSession = await getDataUserAverageSession(18);
+      setDataUserAverageSession(dataFromBackAverageSession);
+    } catch (error) {
+      setDataUserAverageSession(USER_AVERAGE_SESSIONS.find(user => user.userId === 18));
+    }
+
+    try {
+      const dataFromBackPerformance = await getDataUserPerformance(18);
+      setDataUserPerformance(dataFromBackPerformance);
+    } catch (error) {
+      setDataUserPerformance(USER_PERFORMANCE);
+    }
+  }
+  fetchData();
+}, []);
 
   return (
     <IndexStyle>

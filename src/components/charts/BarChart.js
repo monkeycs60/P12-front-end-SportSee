@@ -36,6 +36,38 @@ const BarChart = ({ dataUserActivity }) => {
   useEffect(() => {
     if (dataUserActivity && d3Container.current) {
 
+
+      const minDate = d3.min(dataUserActivity.sessions, (d) => d.day);
+const maxDate = d3.max(dataUserActivity.sessions, (d) => d.day);
+
+
+      const handleMouseOver = (element, d) => {
+  d3.select(element)
+    .attr("fill", "rgba(128, 128, 128, 0.3)");
+
+  d3.select(tooltipRef.current)
+    .style("display", "block")
+    .style("background-color", "rgba(255, 255, 255, 0.8)")
+    .style("padding", "8px")
+    .style("border-radius", "4px")
+    .style("font-size", "12px")
+    .style("color", "black")
+    .html(formatTooltipContent(d));
+};
+
+const handleMouseMove = (event) => {
+  d3.select(tooltipRef.current)
+    .style("left", `${event.pageX + 10}px`)
+    .style("top", `${event.pageY + 10}px`);
+};
+
+const handleMouseOut = (element) => {
+  d3.select(element)
+    .attr("fill", "transparent");
+
+  d3.select(tooltipRef.current).style("display", "none");
+};
+
       const formatTooltipContent = (d) => {
   return `
     <strong>Date:</strong> ${formatDate(d.day)}<br />
@@ -69,6 +101,9 @@ const borderRadius = 3;
         .range([0, w])
         .padding(0);
 
+  
+
+
         const yScale = d3
         .scaleLinear()
         .domain([0, d3.max(
@@ -84,7 +119,7 @@ const borderRadius = 3;
         .tickSize(0)
         // .tickSizeOuter(0);
         const yAxis = d3.axisRight(yScale)
-        .tickSize(w - 40) 
+        .tickSize(w - 70) 
         .tickPadding(30)
         .ticks(5);
 
@@ -109,7 +144,8 @@ const borderRadius = 3;
         svg.selectAll("g").selectAll("line")
         .filter((d, i) => i !== 0)
         .attr("stroke-dasharray", "2,2")
-        // We set up the bars
+
+        // calorie bar
      svg
   .selectAll(".calorie-bar")
   .data(dataUserActivity.sessions)
@@ -118,34 +154,16 @@ const borderRadius = 3;
   .attr("class", "calorie-bar")
   .attr("d", (d) =>
     drawRoundedBar(
-      xScale(formatDate(d.day)) + xScale.bandwidth() / 4,
+      xScale(formatDate(d.day)) + xScale.bandwidth() / 8,
       yScale(d.calories),
-      xScale.bandwidth() / 8,
+      xScale.bandwidth() / 16,
       h - yScale(d.calories),
       borderRadius
     )
   )
   .attr("fill", "#E60000")
-  .on("mouseover", (event, d) => {
-    d3.select(tooltipRef.current)
-      .style("display", "block")
-      .style("background-color", "rgba(255, 255, 255, 0.8)")
-      .style("padding", "8px")
-      .style("border-radius", "4px")
-      .style("font-size", "12px")
-      .style("color", "black")
-      .html(formatTooltipContent(d));
-  })
-  .on("mousemove", (event) => {
-    d3.select(tooltipRef.current)
-      .style("left", `${event.pageX + 10}px`)
-      .style("top", `${event.pageY + 10}px`);
-  })
-  .on("mouseout", () => {
-    d3.select(tooltipRef.current).style("display", "none");
-  });
-  
 
+// kilogram bars
        svg
   .selectAll(".bar")
   .data(dataUserActivity.sessions)
@@ -156,36 +174,37 @@ const borderRadius = 3;
     drawRoundedBar(
       xScale(formatDate(d.day)),
       yScale(d.kilogram),
-      xScale.bandwidth() / 8,
+      xScale.bandwidth() / 16,
       h - yScale(d.kilogram),
       borderRadius
     )
   )
   .attr("fill", "#282D30")
-    .on("mouseover", (event, d) => {
-    d3.select(tooltipRef.current)
-      .style("display", "block")
-      .style("background-color", "rgba(255, 255, 255, 0.8)")
-      .style("padding", "8px")
-      .style("border-radius", "4px")
-      .style("font-size", "12px")
-      .style("color", "black")
-      .html(formatTooltipContent(d));
-  })
-  .on("mousemove", (event) => {
-    d3.select(tooltipRef.current)
-      .style("left", `${event.pageX + 10}px`)
-      .style("top", `${event.pageY - 10}px`);
-  })
-  .on("mouseout", () => {
-    d3.select(tooltipRef.current).style("display", "none");
-  });
         
         svg.selectAll("g").selectAll("path.domain").attr("stroke", "none");
         svg.selectAll('g').selectAll('text').attr('margin', '50px')
 svg.selectAll('.y.axis') 
     .selectAll('text')
   .style("fill", "#E60000")   
+
+  svg
+  .selectAll(".hover-area")
+  .data(dataUserActivity.sessions)
+  .enter()
+  .append("rect")
+  .attr("class", "hover-area")
+  .attr("x", (d) => xScale(formatDate(d.day)))
+  .attr("y", 0)
+  .attr("width", xScale.bandwidth())
+  .attr("height", h)
+  .attr("fill", "transparent")
+  .on("mouseover", function (event, d) {
+    handleMouseOver(this, d);
+  })
+  .on("mousemove", handleMouseMove)
+  .on("mouseout", function () {
+    handleMouseOut(this);
+  });
  }
   }, [dataUserActivity]);
     return (
