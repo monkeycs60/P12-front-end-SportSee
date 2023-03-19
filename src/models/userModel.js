@@ -4,10 +4,10 @@ export function reformateUser(data) {
   const lastName = data.userInfos.lastName;
   const age = data.userInfos.age;
   const score = data.score;
-  const calorieCount = data.keyData.calorieCount;
-  const proteinCount = data.keyData.proteinCount;
-  const carbohydrateCount = data.keyData.carbohydrateCount;
-  const lipidCount = data.keyData.lipidCount;
+  const Calories = data.keyData.calorieCount;
+  const Proteines = data.keyData.proteinCount;
+  const Glucides = data.keyData.carbohydrateCount;
+  const Lipides = data.keyData.lipidCount;
 
   return {
     id,
@@ -15,10 +15,10 @@ export function reformateUser(data) {
     lastName,
     age,
     score,
-    calorieCount,
-    proteinCount,
-    carbohydrateCount,
-    lipidCount,
+    Calories,
+    Proteines,
+    Glucides,
+    Lipides,
   };
 }
 
@@ -29,9 +29,9 @@ export class User {
     this.lastName = data.lastName;
     this.age = data.age;
     this.score = data.score;
-    this.calorieCount = data.calorieCount;
-    this.proteinCount = data.proteinCount;
-    this.carbohydrateCount = data.carbohydrateCount;
-    this.lipidCount = data.lipidCount;
+    this.Calories = data.Calories;
+    this.Proteines = data.Proteines;
+    this.Glucides = data.Glucides;
+    this.Lipides = data.Lipides;
   }
 }

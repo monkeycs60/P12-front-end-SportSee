@@ -24,8 +24,8 @@ const RadarChart = ({ dataUserPerformance }) => {
           const orderedKeys = ['intensity', 'speed', 'strength', 'endurance', 'energy', 'cardio'];
           const chartData = orderedKeys.map((key) => [frenchLabels[key], dataUserPerformance[key]]);
 
-      const width = 300;
-      const height = 240;
+      const width = 260;
+      const height = 190;
       const margin = { top: 30, right: 0, bottom: 30, left: 0 };
       const radius = Math.min(width, height) / 2;
 
@@ -103,7 +103,7 @@ const RadarChart = ({ dataUserPerformance }) => {
           'x',
           (d, i) =>
             (radius + 10) * Math.cos(angleSlice * i - Math.PI / 2) -
-            10 * (d[0].length - 1) + 40
+            10 * (d[0].length - 1) + 35
         )
         .attr(
           'y',

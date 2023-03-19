@@ -31,15 +31,24 @@ function formatDate(dateString) {
 const BarChart = ({ dataUserActivity }) => {
 
     const d3Container = useRef(null);
+    const tooltipRef = useRef(null);
 
   useEffect(() => {
     if (dataUserActivity && d3Container.current) {
 
+      const formatTooltipContent = (d) => {
+  return `
+    <strong>Date:</strong> ${formatDate(d.day)}<br />
+    <strong>Kilograms:</strong> ${d.kilogram.toFixed(2)} kg<br />
+    <strong>Calories:</strong> ${d.calories.toFixed(2)} kcal<br />
+  `;
+};
+
         
 const borderRadius = 3;
         // We set up the svg container
-        const w = 460;
-        const h = 120;
+        const w = 840;
+        const h = 140;
     
 
       const svg = d3.select(d3Container.current);
@@ -117,6 +126,25 @@ const borderRadius = 3;
     )
   )
   .attr("fill", "#E60000")
+  .on("mouseover", (event, d) => {
+    d3.select(tooltipRef.current)
+      .style("display", "block")
+      .style("background-color", "rgba(255, 255, 255, 0.8)")
+      .style("padding", "8px")
+      .style("border-radius", "4px")
+      .style("font-size", "12px")
+      .style("color", "black")
+      .html(formatTooltipContent(d));
+  })
+  .on("mousemove", (event) => {
+    d3.select(tooltipRef.current)
+      .style("left", `${event.pageX + 10}px`)
+      .style("top", `${event.pageY + 10}px`);
+  })
+  .on("mouseout", () => {
+    d3.select(tooltipRef.current).style("display", "none");
+  });
+  
 
        svg
   .selectAll(".bar")
@@ -134,6 +162,24 @@ const borderRadius = 3;
     )
   )
   .attr("fill", "#282D30")
+    .on("mouseover", (event, d) => {
+    d3.select(tooltipRef.current)
+      .style("display", "block")
+      .style("background-color", "rgba(255, 255, 255, 0.8)")
+      .style("padding", "8px")
+      .style("border-radius", "4px")
+      .style("font-size", "12px")
+      .style("color", "black")
+      .html(formatTooltipContent(d));
+  })
+  .on("mousemove", (event) => {
+    d3.select(tooltipRef.current)
+      .style("left", `${event.pageX + 10}px`)
+      .style("top", `${event.pageY - 10}px`);
+  })
+  .on("mouseout", () => {
+    d3.select(tooltipRef.current).style("display", "none");
+  });
         
         svg.selectAll("g").selectAll("path.domain").attr("stroke", "none");
         svg.selectAll('g').selectAll('text').attr('margin', '50px')
@@ -157,7 +203,7 @@ svg.selectAll('.y.axis')
                 </div>
                 </div>
             </div>
-        
+           <div ref={tooltipRef} style={{ position: "absolute", display: "none", pointerEvents: "none" }} />
              <svg
           className="d3-component"
           ref={d3Container}
@@ -169,7 +215,7 @@ svg.selectAll('.y.axis')
 export default BarChart;
 
 const GraphStyle = styled.div`
-    width: auto;
+   height: 50%;
     padding: 10px 20px;
     display: flex;
     flex-direction: column;

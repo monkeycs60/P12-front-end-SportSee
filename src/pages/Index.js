@@ -12,6 +12,7 @@ import BarChart from "../components/charts/BarChart";
 import LineChart from "../components/charts/LineChart";
 import RadialChart from "../components/charts/RadialChart";
 import RadarChart from "../components/charts/RadarChart";
+import Nutriments from "../components/nutriments/Nutriments";
 
 
 
@@ -46,13 +47,16 @@ const Index = () => {
   return (
     <IndexStyle>
       <IndexGreetings dataUser={dataUser} />
-      <div className="bar-grid">
-      <BarChart dataUserActivity={dataUserActivity} />
-      <LineChart dataUserAverageSession={dataUserAverageSession} />
-      </div>
-      <div className="another-grid">
-      <RadialChart dataUserScore={dataUserScore} />
-      <RadarChart dataUserPerformance={dataUserPerformance} />
+      <div className="all-data-container">
+        <div className="chart-container">
+        <BarChart dataUserActivity={dataUserActivity} />
+          <div className="lower-charts">
+          <LineChart dataUserAverageSession={dataUserAverageSession} />     
+          <RadarChart dataUserPerformance={dataUserPerformance} />
+          <RadialChart dataUserScore={dataUserScore} />
+          </div>
+        </div>
+        <Nutriments dataUser={dataUser} />
       </div>
     </IndexStyle>
   );
@@ -61,12 +65,30 @@ const Index = () => {
 export default Index;
 
 const IndexStyle = styled.div`
-  width: 100%;
-  padding: 10px 20px;
-  .bar-grid {
+  width: calc(100vw - 100px);
+  height: calc(100vh - 70px);
+  background-color: white;
+  padding: 40px 80px;
+  .all-data-container {
     display: flex;
+    justify-content: space-between;
+    background-color: green;
+    height: 85%;
+    gap: 40px;
   }
-  .another-grid {
+  .chart-container {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    background: orange;
+  }
+  .lower-charts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    margin: 16px;
   }
 `;

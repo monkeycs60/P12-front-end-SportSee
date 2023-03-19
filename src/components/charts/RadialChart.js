@@ -12,12 +12,12 @@ const RadialChart = ({ dataUserScore }) => {
 
     const arc = d3.arc()
       .innerRadius(0)
-      .outerRadius(100)
+      .outerRadius(70)
       .startAngle(0);
 
     const svg = d3.select(ref.current)
-      .attr('width', 300)
-      .attr('height', 260);
+      .attr('width', 260)
+      .attr('height', 250);
 
     // Create a group element to contain the circle and text
     const circleGroup = svg.append('g')
@@ -31,8 +31,8 @@ const RadialChart = ({ dataUserScore }) => {
 
     // Foreground arc (score)
     const scoreArc = d3.arc()
-      .innerRadius(90) // Adjust this value to control the thickness of the arc
-      .outerRadius(100)
+      .innerRadius(70) // Adjust this value to control the thickness of the arc
+      .outerRadius(60)
       .startAngle(0)
       .endAngle(-score * tau)
       .cornerRadius(10);

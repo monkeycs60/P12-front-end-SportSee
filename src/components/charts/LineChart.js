@@ -14,8 +14,10 @@ const LineChart = ({ dataUserAverageSession }) => {
       const dayOfWeek = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
 
       const margin = { top: 10, right: 30, bottom: 30, left: 50 },
-        width = 500 - margin.left - margin.right,
-        height = 320 - margin.top - margin.bottom;
+        // width = 260 - margin.left - margin.right,
+        // height = 250 - margin.top - margin.bottom;
+        width =  260 - margin.left - margin.right,
+        height = 250 - margin.top - margin.bottom;
 
       const svg = d3
         .select(d3Container.current)
@@ -75,9 +77,7 @@ const LineChart = ({ dataUserAverageSession }) => {
         .attr('y', 100)
         .attr('text-anchor', 'start')
         .attr('font-size', '18px')
-        //color of the text
         .attr('fill', 'white')
-        //opacity of the text
         .attr('opacity', 0.5)
         .text('Durée moyenne des sessions');
 
