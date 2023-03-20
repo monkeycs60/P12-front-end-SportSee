@@ -2,6 +2,12 @@ import * as d3 from 'd3';
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
+const updateDimensions = () => {
+  const width = window.innerWidth > 1400 ? 300 : 200;
+  const height = window.innerWidth > 1400 ? 240 : 160;
+  return { width, height };
+};
+
 
 const RadarChart = ({ dataUserPerformance }) => {
     const chartRef = useRef(null);
@@ -10,9 +16,12 @@ const RadarChart = ({ dataUserPerformance }) => {
     useEffect(() => {
         if (dataUserPerformance) {
         console.log(dataUserPerformance);
+        const { width, height } = updateDimensions();
+  window.addEventListener("resize", updateDimensions);
+
       const chartElement = chartRef.current;
-      // const chartData = Object.entries(dataUserPerformance);
- const frenchLabels = {
+
+      const frenchLabels = {
             cardio: 'Cardio',
             energy: 'Énergie',
             endurance: 'Endurance',
@@ -24,18 +33,24 @@ const RadarChart = ({ dataUserPerformance }) => {
           const orderedKeys = ['intensity', 'speed', 'strength', 'endurance', 'energy', 'cardio'];
           const chartData = orderedKeys.map((key) => [frenchLabels[key], dataUserPerformance[key]]);
 
-      const width = 260;
-      const height = 190;
+// if window size is less than 500px, change the chart size
+      // const width = window.innerWidth > 1400 ? 300 : 200;
+      // // const width = 320;
+      // const height = window.innerWidth > 1400 ? 240 : 160;
       const margin = { top: 30, right: 0, bottom: 30, left: 0 };
       const radius = Math.min(width, height) / 2;
 
       const angleSlice = (2 * Math.PI) / chartData.length;
 
+   
+
       const svg = d3
         .select(chartElement)
         .append('svg')
-        .attr('width', width + margin.left + margin.right)
-        .attr('height', height + margin.top + margin.bottom)
+        .attr('width', width)
+        .attr('height', height)
+        .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+        // .attr('preserveAspectRatio', 'xMidYMid meet')
         .append('g')
         .attr(
           'transform',
@@ -130,6 +145,7 @@ const RadarChart = ({ dataUserPerformance }) => {
 
       return () => {
         d3.select(chartElement).selectAll('*').remove();
+          window.removeEventListener("resize", updateDimensions);
       };
     }
   }, [dataUserPerformance]);
