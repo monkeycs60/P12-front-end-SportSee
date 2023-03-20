@@ -36,11 +36,6 @@ const BarChart = ({ dataUserActivity }) => {
   useEffect(() => {
     if (dataUserActivity && d3Container.current) {
 
-
-      const minDate = d3.min(dataUserActivity.sessions, (d) => d.day);
-const maxDate = d3.max(dataUserActivity.sessions, (d) => d.day);
-
-
       const handleMouseOver = (element, d) => {
   d3.select(element)
     .attr("fill", "rgba(128, 128, 128, 0.3)");
@@ -77,7 +72,7 @@ const handleMouseOut = (element) => {
 };
 
         
-const borderRadius = 3;
+        const borderRadius = 3;
         // We set up the svg container
         const w = 840;
         const h = 140;
@@ -91,8 +86,8 @@ const borderRadius = 3;
         .style("overflow", "visible")
         .style("fill", "yellow");
 
-        // clipath for rounded corners
-        
+      // translate the x axis text
+     
 
         // We set up the scales
         const xScale = d3
@@ -126,7 +121,7 @@ const borderRadius = 3;
      // We set up the axis
         svg
         .append("g")
-        .attr("transform", `translate(-15, ${h})`)
+        .attr("transform", `translate(-40, ${h})`)
         .call(xAxis);
 
         const yAxisGroup = svg
@@ -193,9 +188,9 @@ svg.selectAll('.y.axis')
   .enter()
   .append("rect")
   .attr("class", "hover-area")
-  .attr("x", (d) => xScale(formatDate(d.day)))
+  .attr("x", (d) => xScale(formatDate(d.day)) - 20)
   .attr("y", 0)
-  .attr("width", xScale.bandwidth())
+  .attr("width", xScale.bandwidth() / 2)
   .attr("height", h)
   .attr("fill", "transparent")
   .on("mouseover", function (event, d) {
@@ -218,7 +213,7 @@ svg.selectAll('.y.axis')
                 </div>
                 <div>
                     <img src={ovalRed} alt="" />
-                    <p>Calories brûlées (kcal)</p>
+                    <p>Calories brûlées (kCal)</p>
                 </div>
                 </div>
             </div>
@@ -250,7 +245,7 @@ const GraphStyle = styled.div`
     .barchart-title {
         display: flex;
         justify-content: space-between;
-        width: 500px;
+        width: 100%;
         margin: 20px 0;
         h3 {
             font-size: 16px;
