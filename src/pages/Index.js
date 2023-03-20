@@ -49,14 +49,14 @@ const Index = () => {
       const dataFromBackActivity = await getDataUserActivity(18);
       setDataUserActivity(dataFromBackActivity);
     } catch (error) {
-      setDataUserActivity(USER_ACTIVITY.find(user => user.userId === 18));
+      setDataUserActivity(USER_ACTIVITY);
     }
 
     try {
       const dataFromBackAverageSession = await getDataUserAverageSession(18);
       setDataUserAverageSession(dataFromBackAverageSession);
     } catch (error) {
-      setDataUserAverageSession(USER_AVERAGE_SESSIONS.find(user => user.userId === 18));
+      setDataUserAverageSession(USER_AVERAGE_SESSIONS);
     }
 
     try {
