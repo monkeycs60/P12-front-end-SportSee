@@ -1,13 +1,13 @@
 import * as d3 from 'd3';
-import { curveBasis } from 'd3';
+import { curveCatmullRom } from 'd3';
 
 export const lineLogic = (dataUserAverageSession, d3Container, width, height) => {
-      d3.select(d3Container.current).selectAll("g").remove(); // Add this line to clear previous chart elements
+      d3.select(d3Container.current).selectAll("g").remove(); 
 
      const sessionsArray = Object.values(dataUserAverageSession.sessions);
 
       //this is the array of days of the week, starting by 0 = Sunday
-      const dayOfWeek = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
+      const dayOfWeek = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];  
 
       // implement tooltip
       const showTooltip = (event, d) => {
@@ -29,11 +29,67 @@ const hideTooltip = () => {
 
 };
 
+// circle on hover
+const handleMouseOver = (event, d) => {
+  const xPos = x(d.day);
+
+ gradient.select(".stop1")
+    .attr("offset", `${(1 - xPos / width) * 100}%`) // Update the offset calculation
+    .attr("stop-color", "rgba(128, 0, 0, 0.5)"); // Change the color to a much darker red
+
+  gradient.select(".stop2")
+    .attr("offset", `${(1 - xPos / width) * 100}%`) // Update the offset calculation
+    .attr("stop-color", "rgba(128, 0, 0, 0)"); // Change the color to a much darker red
+
+  svg.select(".gradient-bg").attr("opacity", 1);
+  d3.select(event.currentTarget)
+    .transition()
+    .duration(600)
+    .attr("r", 10)
+    .attr("opacity", "1")
+    .attr("fill", (d) => {
+      const radialGradient = svg.append("defs")
+        .append("radialGradient")
+        .attr("id", "radial-gradient");
+
+      radialGradient.append("stop")
+        .attr("offset", "30%")
+        .attr("stop-color", "white");
+
+      radialGradient.append("stop")
+        .attr("offset", "100%")
+        .attr("stop-color", "rgba(255, 255, 255, 0.3)");
+
+      return "url(#radial-gradient)";
+    });
+
+  showTooltip(event, d);
+};
+
+const handleMouseOut = (event, d) => {
+  svg.select(".gradient-bg").attr("opacity", 0);
+
+  gradient.select(".stop1")
+    .attr("offset", "0%")
+    .attr("stop-color", "rgba(255, 0, 0, 0.5)"); // Revert to the original color
+
+  gradient.select(".stop2")
+    .attr("offset", "100%")
+    .attr("stop-color", "rgba(255, 0, 0, 0.5)"); // Revert to the original color
+
+  d3.select(event.currentTarget)
+    .transition()
+    .duration(200)
+    .attr("r", 20)
+    .attr("opacity", "0")
+    .attr("fill", "white");
+
+  hideTooltip();
+};
+
       // set the dimensions and margins of the graph
       const margin = { top: 10, right: 30, bottom: 30, left: 50 };
-        // width =  260 - margin.left - margin.right,
-        // height = 250 - margin.top - margin.bottom;
-
+        
       const svg = d3
         .select(d3Container.current)
         .attr('width', width + margin.left + margin.right)
@@ -54,6 +110,8 @@ const hideTooltip = () => {
       svg
         .append('g')
         .attr('transform', `translate(0,${height})`)
+        .attr('opacity', '0.7')
+        .attr('stroke', 'white')
         .call(
           d3
             .axisBottom(x)
@@ -70,7 +128,7 @@ const hideTooltip = () => {
         .line()
         .x(d => x(d.day))
         .y(d => y(d.sessionLength))
-        .curve(curveBasis);
+        .curve(curveCatmullRom.alpha(0.5));
 
          const extendedSessionsArray = [
         { day: -1, sessionLength: sessionsArray[0].sessionLength },
@@ -108,6 +166,35 @@ const hideTooltip = () => {
         .text( `sessions`)
 
 
+        //gradient on hover
+  const gradient = svg.append("defs")
+  .append("linearGradient")
+  .attr("id", "bg-gradient")
+  .attr("x1", "100%")
+  .attr("y1", "0%")
+  .attr("x2", "0%")
+  .attr("y2", "0%");
+
+gradient.append("stop")
+  .attr("class", "stop1")
+  .attr("offset", "0%")
+  .attr("stop-color", "rgba(128, 0, 0, 0.5)")
+  .attr("stop-opacity", 1);
+
+gradient.append("stop")
+  .attr("class", "stop2")
+  .attr("offset", "100%")
+  .attr("stop-color", "rgba(255, 0, 0, 0.5)")
+  .attr("stop-opacity", 0);
+
+  // Add the gradient to the background
+        svg.append("rect")
+  .attr("width", width)
+  .attr("height", "100%")
+  .attr("fill", "url(#bg-gradient)")
+  .attr("opacity", 0)
+  .attr("class", "gradient-bg");
+
      svg.selectAll("g").selectAll("path.domain").attr("stroke", "none");
 
      svg
@@ -120,8 +207,8 @@ const hideTooltip = () => {
   .attr("r", 20)
   .attr("fill", "white")
   .attr("opacity", 0) // Make the circles invisible, but still interactive
-  .on("mouseover", showTooltip)
+  .on("mouseover", handleMouseOver)
   .on("mousemove", showTooltip)
-  .on("mouseout", hideTooltip);
+  .on("mouseout", handleMouseOut);
 
     }
