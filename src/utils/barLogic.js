@@ -9,18 +9,23 @@ export const barLogic = (dataUserActivity, d3Container, width, height, tooltipRe
 
   d3.select(tooltipRef.current)
     .style("display", "block")
-    .style("background-color", "rgba(255, 255, 255, 0.8)")
+    .style("background-color", "red")
     .style("padding", "8px")
     .style("border-radius", "4px")
     .style("font-size", "12px")
-    .style("color", "black")
+    .style("color", "white")
     .html(formatTooltipContent(d));
 };
 
 const handleMouseMove = (event) => {
+  const tooltipWidth = tooltipRef.current.clientWidth;
+  const tooltipHeight = tooltipRef.current.clientHeight;
+  const offsetX = 80;
+  const offsetY = 40;
+
   d3.select(tooltipRef.current)
-    .style("left", `${event.pageX + 10}px`)
-    .style("top", `${event.pageY + 10}px`);
+    .style("left", `${event.pageX - tooltipWidth + offsetX}px`)
+    .style("top", `${event.pageY - tooltipHeight - offsetY}px`);
 };
 
 const handleMouseOut = (element) => {
@@ -32,9 +37,9 @@ const handleMouseOut = (element) => {
 
       const formatTooltipContent = (d) => {
   return `
-    <strong>Date:</strong> ${formatDate(d.day)}<br />
-    <strong>Kilograms:</strong> ${d.kilogram.toFixed(2)} kg<br />
-    <strong>Calories:</strong> ${d.calories.toFixed(2)} kcal<br />
+    ${d.kilogram}kg<br />
+    <br />
+    ${d.calories}kcal<br />
   `;
 };
   

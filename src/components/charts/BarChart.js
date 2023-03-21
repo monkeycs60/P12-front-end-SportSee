@@ -1,4 +1,3 @@
-import * as d3 from 'd3';
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import oval from "../../assets/Oval.svg";
