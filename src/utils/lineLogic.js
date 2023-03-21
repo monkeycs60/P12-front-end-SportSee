@@ -85,15 +85,27 @@ const hideTooltip = () => {
         .attr('stroke-width', 3)
         .attr('d', line)
 
+       
           svg
         .append('text')
-        .attr('x', 20)
-        .attr('y', 100)
+        .attr('x', 0)
+        .attr('y', 40)
         .attr('text-anchor', 'start')
         .attr('font-size', '18px')
         .attr('fill', 'white')
-        .attr('opacity', 0.5)
-        .text('Durée moyenne des sessions');
+        .attr('opacity', 0.7)
+        .text( `Durée moyenne des`)
+
+        svg
+        .append('text')
+        .attr('x', 0)
+        .attr('y', 70)
+        .attr('text-anchor', 'start')
+        .attr('font-size', '18px')
+        .attr('fill', 'white')
+        .attr('opacity', 0.7)
+        .text( `sessions`)
+
 
      svg.selectAll("g").selectAll("path.domain").attr("stroke", "none");
 
