@@ -32,13 +32,13 @@ const hideTooltip = () => {
 // circle on hover
 const handleMouseOver = (event, d) => {
   const xPos = x(d.day);
-
+  
  gradient.select(".stop1")
-    .attr("offset", `${(1 - xPos / width) * 100}%`) // Update the offset calculation
+.attr("offset", `${(1 - (xPos) / (width + margin.left + margin.right)) * 100}%`)
     .attr("stop-color", "rgba(128, 0, 0, 0.5)"); // Change the color to a much darker red
 
   gradient.select(".stop2")
-    .attr("offset", `${(1 - xPos / width) * 100}%`) // Update the offset calculation
+.attr("offset", `${(1 - (xPos) / (width + margin.left + margin.right)) * 100}%`)
     .attr("stop-color", "rgba(128, 0, 0, 0)"); // Change the color to a much darker red
 
   svg.select(".gradient-bg").attr("opacity", 1);
@@ -189,11 +189,13 @@ gradient.append("stop")
 
   // Add the gradient to the background
         svg.append("rect")
-  .attr("width", width)
-  .attr("height", "100%")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom + 4)
   .attr("fill", "url(#bg-gradient)")
   .attr("opacity", 0)
-  .attr("class", "gradient-bg");
+  .attr("class", "gradient-bg")
+  .attr("transform", `translate(-50, -10)`);
+
 
      svg.selectAll("g").selectAll("path.domain").attr("stroke", "none");
 
