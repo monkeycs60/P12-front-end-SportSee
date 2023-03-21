@@ -14,18 +14,19 @@ export const lineLogic = (dataUserAverageSession, d3Container, width, height) =>
   const tooltip = d3.select(d3Container.current.parentElement).select(".tooltip");
   tooltip
     .style("display", "inline")
-    .style("left", event.clientX + "px")
-    .style("top", event.clientY + "px")
-    .html(`Day: ${dayOfWeek[d.day % 7]}<br/>Session Length: ${d.sessionLength}`);
-     // Add the background-gradient class
-   d3.select(d3Container.current.parentElement).classed("background-gradient", true);
+    .style("left", event.clientX + 10 + "px")
+    .style("top", event.clientY - 50 + "px")
+    .style("background", "white")
+    .style("padding", "10px")
+    .style("font-weight", "600")
+    .html(`${d.sessionLength} min`);
+    
 };
 
 const hideTooltip = () => {
   const tooltip = d3.select(d3Container.current.parentElement).select(".tooltip");
   tooltip.style("display", "none");
-  // Remove the background-gradient class
-  d3.select(d3Container.current.parentElement).classed("background-gradient", false);
+
 };
 
       // set the dimensions and margins of the graph
