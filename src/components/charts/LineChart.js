@@ -43,9 +43,6 @@ export default LineChart;
 const StyledLineChart = styled.div`
 background-color: red;
 border-radius: 5px;
- /* .background-gradient {
-    background: linear-gradient(180deg, green 0%, #ffffff 100%);
-  } */
 .tooltip {
     position: absolute;
     display: none;

@@ -29,16 +29,27 @@ const hideTooltip = () => {
 
 };
 
+const updateGradient = (xPos) => {
+  gradient.select(".stop1")
+    .attr("offset", `${(1 - (xPos) / (width + margin.left + margin.right)) * 100}%`)
+    .attr("stop-color", "rgba(128, 0, 0, 0.5)");
+
+  gradient.select(".stop2")
+    .attr("offset", `${(1 - (xPos) / (width + margin.left + margin.right)) * 100}%`)
+    .attr("stop-color", "rgba(128, 0, 0, 0)");
+};
+
 // circle on hover
 const handleMouseOver = (event, d) => {
-  const xPos = x(d.day);
+   const xPos = x(d.day) + margin.left; // Add margin.left to account for the translation
+  updateGradient(xPos);
   
  gradient.select(".stop1")
-.attr("offset", `${(1 - (xPos) / (width + margin.left + margin.right)) * 100}%`)
+    .attr("offset", `${(1 - (xPos) / (width + margin.left + margin.right)) * 100}%`)
     .attr("stop-color", "rgba(128, 0, 0, 0.5)"); // Change the color to a much darker red
 
   gradient.select(".stop2")
-.attr("offset", `${(1 - (xPos) / (width + margin.left + margin.right)) * 100}%`)
+    .attr("offset", `${(1 - (xPos) / (width + margin.left + margin.right)) * 100}%`)
     .attr("stop-color", "rgba(128, 0, 0, 0)"); // Change the color to a much darker red
 
   svg.select(".gradient-bg").attr("opacity", 1);
@@ -68,14 +79,6 @@ const handleMouseOver = (event, d) => {
 
 const handleMouseOut = (event, d) => {
   svg.select(".gradient-bg").attr("opacity", 0);
-
-  gradient.select(".stop1")
-    .attr("offset", "0%")
-    .attr("stop-color", "rgba(255, 0, 0, 0.5)"); // Revert to the original color
-
-  gradient.select(".stop2")
-    .attr("offset", "100%")
-    .attr("stop-color", "rgba(255, 0, 0, 0.5)"); // Revert to the original color
 
   d3.select(event.currentTarget)
     .transition()
