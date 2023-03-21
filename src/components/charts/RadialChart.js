@@ -1,74 +1,36 @@
-import * as d3 from 'd3';
 import { useEffect, useRef } from "react";
-import styled from "styled-components";
+import { radialLogic } from '../../utils/radialLogic';
+
+const updateDimensions = () => {
+  const width = window.innerWidth > 1400 ? 300 : 200;
+  const height = window.innerWidth > 1400 ? 240 : 160;
+  return { width, height };
+};
 
 const RadialChart = ({ dataUserScore }) => {
-  const ref = useRef(null);
+  const svgRef = useRef(null);
+  
 
   useEffect(() => {
-  if (dataUserScore && ref.current) {
-    const score = dataUserScore.score;
-    const tau = 2 * Math.PI;
+    if (dataUserScore && svgRef.current) {
+      const { width, height } = updateDimensions();
+      radialLogic(dataUserScore, svgRef, width, height);
 
-    const arc = d3.arc()
-      .innerRadius(0)
-      .outerRadius(70)
-      .startAngle(0);
+      const handleResize = () => {
+                const { width, height } = updateDimensions(); // Update dimensions on resize
+        radialLogic(dataUserScore, svgRef, width, height);
+      };
+      window.addEventListener("resize", handleResize);
 
-    const svg = d3.select(ref.current)
-      .attr('width', 260)
-      .attr('height', 250);
-
-    // Create a group element to contain the circle and text
-    const circleGroup = svg.append('g')
-      .attr('transform', 'translate(150, 130)');
-
-    // Background arc
-    circleGroup.append('path')
-      .datum({ endAngle: tau })
-      .style('fill', '#ddd')
-      .attr('d', arc)
-
-    // Foreground arc (score)
-    const scoreArc = d3.arc()
-      .innerRadius(70) // Adjust this value to control the thickness of the arc
-      .outerRadius(60)
-      .startAngle(0)
-      .endAngle(-score * tau)
-      .cornerRadius(10);
-
-    circleGroup.append('path')
-      .attr('d', scoreArc())
-      .style('fill', '#FF0000');
-       
-
-    // Score text
-    circleGroup.append('text')
-      .attr('text-anchor', 'middle')
-      .attr('dy', '.3em')
-      .style('font-size', '24px')
-      .text(`${Math.round(score * 100)}%`)
-      .style("font-weight", "bold");
-
-    // "de votre objectif" text
-    circleGroup.append('text')
-      .attr('text-anchor', 'middle')
-      .attr('dy', '30px')
-      .style('font-size', '14px')
-      .text('de votre objectif');
-
-    // "Score" text outside the circle
-    svg.append('text')
-      .attr('x', 30) // Adjust this value to control the horizontal position of the text
-      .attr('y', 30) // Adjust this value to control the vertical position of the text
-      .style('font-size', '18px')
-      .text('Score');
-  }
-}, [dataUserScore]);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
+  }, [dataUserScore]);
 
   return (
     <div>
-      <svg ref={ref}></svg>
+      <svg ref={svgRef}></svg>
     </div>
   );
 };
