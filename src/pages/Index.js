@@ -29,43 +29,40 @@ const Index = () => {
   const [dataUserScore, setDataUserScore] = useState(null);
 
    useEffect(() => {
-  async function fetchData() {
-    try {
-      const dataFromBack = await getDataUser(18);
-      setDataUser(dataFromBack);
-    } catch (error) {
-      setDataUser(USER_MAIN_DATA);
-      console.log(dataUser);
-    }
+ async function fetchData() {
+  try {
+    const [
+      dataFromBack,
+      dataFromBackScore,
+      dataFromBackActivity,
+      dataFromBackAverageSession,
+      dataFromBackPerformance,
+    ] = await Promise.all([
+      getDataUser(18),
+      getDataUserScore(18),
+      getDataUserActivity(18),
+      getDataUserAverageSession(18),
+      getDataUserPerformance(18),
+    ]);
 
-    try {
-      const dataFromBackScore = await getDataUserScore(18);
-      setDataUserScore(dataFromBackScore);
-    } catch (error) {
-      setDataUserScore(USER_MAIN_DATA);
-    }
+    // Set data from back
+    setDataUser(dataFromBack);
+    setDataUserScore(dataFromBackScore);
+    setDataUserActivity(dataFromBackActivity);
+    setDataUserAverageSession(dataFromBackAverageSession);
+    setDataUserPerformance(dataFromBackPerformance);
 
-    try {
-      const dataFromBackActivity = await getDataUserActivity(18);
-      setDataUserActivity(dataFromBackActivity);
-    } catch (error) {
-      setDataUserActivity(USER_ACTIVITY);
-    }
+    // Set mocked data from data.js
+    // setDataUser(USER_MAIN_DATA);
+    // setDataUserScore(USER_MAIN_DATA);
+    // setDataUserActivity(USER_ACTIVITY);
+    // setDataUserAverageSession(USER_AVERAGE_SESSIONS);
+    // setDataUserPerformance(USER_PERFORMANCE);
 
-    try {
-      const dataFromBackAverageSession = await getDataUserAverageSession(18);
-      setDataUserAverageSession(dataFromBackAverageSession);
-    } catch (error) {
-      setDataUserAverageSession(USER_AVERAGE_SESSIONS);
-    }
-
-    try {
-      const dataFromBackPerformance = await getDataUserPerformance(18);
-      setDataUserPerformance(dataFromBackPerformance);
-    } catch (error) {
-      setDataUserPerformance(USER_PERFORMANCE);
-    }
+  } catch (error) {
+    alert("Problème lors de la connexion avec la base de données");
   }
+}
   fetchData();
 }, []);
 
