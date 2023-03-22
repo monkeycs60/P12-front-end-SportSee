@@ -8,8 +8,8 @@ const updateDimensions = () => {
 
   switch (true) {
     case window.innerWidth > 1700:
-      width = 360;
-      height = 284;
+      width = 370;
+      height = 274;
       break;
     case window.innerWidth > 1400:
       width = 300;

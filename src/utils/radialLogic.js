@@ -14,7 +14,8 @@ export const radialLogic = (dataUserScore, svgRef, width, height, circleRadius) 
     const svg = d3.select(svgRef.current)
       .attr('width', width) 
       .attr('height', height)
-      .style('background-color', '#FBFBFB');
+      // .style('background-color', '#FBFBFB');
+      
     // Create a group element to contain the circle and text
     const circleGroup = svg.append('g')
           .attr('transform', `translate(${width / 2}, ${height / 2})`);
@@ -22,7 +23,7 @@ export const radialLogic = (dataUserScore, svgRef, width, height, circleRadius) 
     // Background arc
     circleGroup.append('path')
       .datum({ endAngle: tau })
-      .style('fill', '#ddd')
+      .style('fill', 'white')
       .attr('d', arc)
 
     // Foreground arc (score)

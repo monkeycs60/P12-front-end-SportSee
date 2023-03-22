@@ -71,7 +71,7 @@ const Index = () => {
       <IndexGreetings dataUser={dataUser} />
       <div className="all-data-container">
         <div className="chart-container">
-        <BarChart dataUserActivity={dataUserActivity} />
+        <BarChart className="bar-chart" dataUserActivity={dataUserActivity} />
           <div className="lower-charts">
           <LineChart dataUserAverageSession={dataUserAverageSession} />     
           <RadarChart dataUserPerformance={dataUserPerformance} />
@@ -94,7 +94,7 @@ const IndexStyle = styled.div`
   .all-data-container {
     display: flex;
     justify-content: space-between;
-    background-color: green;
+    background-color: white;
     height: 85%;
     gap: 40px;
   }
@@ -102,14 +102,17 @@ const IndexStyle = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
-    background: orange;
+    gap: 20px;
+    height: auto;
+    width: 80%;
+    background: white;
+    margin-top: 30px;
   }
   .lower-charts {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 90%;
     height: 50%;
     margin: 16px;
   }

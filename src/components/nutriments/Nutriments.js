@@ -32,4 +32,6 @@ const NutrimentsStyle = styled.div`
     flex-direction: column;
     justify-content: space-between;
     background-color: white;
+   margin-top: 30px;
+   padding: 20px 0;
     `;

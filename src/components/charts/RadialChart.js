@@ -7,8 +7,8 @@ const updateDimensions = () => {
 
   switch (true) {
     case window.innerWidth > 1700:
-      width = 297.5;
-      height = 284;
+      width = 307.5;
+      height = 274;
       circleRadius = 90;
       break;
     case window.innerWidth > 1400:
@@ -54,5 +54,6 @@ const RadialChart = ({ dataUserScore }) => {
 export default RadialChart;
 
 const StyledRadialChart = styled.div`
-  box-shadow: 0px 2px 4px 0px #00000005;
+  border-radius: 5px;
+  background-color: #E5E5E5;
   `;

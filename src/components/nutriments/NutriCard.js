@@ -16,11 +16,11 @@ export default NutriCard;
 
 const NutriCardStyle = styled.div`
     width: 100%;
-    height: 100px;
+    height: 110px;
     display: flex;
     align-items: center;
     gap: 20px;
-    background-color: lightgray;
+    background-color: #E5E5E5;
     border-radius: 5px;
     padding: 10px 10px 10px 30px;
     h3 {

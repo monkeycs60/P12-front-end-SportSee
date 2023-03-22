@@ -68,7 +68,7 @@ const handleMouseOut = (element) => {
         .domain([0, d3.max(
             dataUserActivity.sessions.map((d) => d.calories * 1.1) 
         )])
-        .range([h, 0])
+        .range([height, 0])
 
         // We set up the axis
         const xAxis = d3.axisBottom(xScale)
@@ -76,14 +76,14 @@ const handleMouseOut = (element) => {
         .tickSize(0)
         // .tickSizeOuter(0);
         const yAxis = d3.axisRight(yScale)
-        .tickSize(w - 70) 
+        .tickSize(width - 70) 
         .tickPadding(30)
         .ticks(5);
 
      // We set up the axis
         svg
         .append("g")
-        .attr("transform", `translate(-40, ${h})`)
+        .attr("transform", `translate(-40, ${height})`)
         .call(xAxis);
 
         const yAxisGroup = svg
@@ -114,7 +114,7 @@ const handleMouseOut = (element) => {
       xScale(formatDate(d.day)) + xScale.bandwidth() / 8,
       yScale(d.calories),
       xScale.bandwidth() / 16,
-      h - yScale(d.calories),
+      height - yScale(d.calories),
       borderRadius
     )
   )
@@ -132,7 +132,7 @@ const handleMouseOut = (element) => {
       xScale(formatDate(d.day)),
       yScale(d.kilogram),
       xScale.bandwidth() / 16,
-      h - yScale(d.kilogram),
+      height - yScale(d.kilogram),
       borderRadius
     )
   )
@@ -153,7 +153,7 @@ svg.selectAll('.y.axis')
   .attr("x", (d) => xScale(formatDate(d.day)) - 20)
   .attr("y", 0)
   .attr("width", xScale.bandwidth() / 2)
-  .attr("height", h)
+  .attr("height", height)
   .attr("fill", "transparent")
   .on("mouseover", function (event, d) {
     handleMouseOver(this, d);
