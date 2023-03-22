@@ -4,7 +4,6 @@ import { formatDate } from './formating/formatDate';
 
 export const barLogic = (dataUserActivity, d3Container, width, height, fontLegend, tickPaded, tickSized, tooltipRef) => {
   console.log(tickPaded);
-  console.log(fontLegend);
   console.log(tickSized);
  const handleMouseOver = (element, d) => {
   d3.select(element)
@@ -74,7 +73,7 @@ const handleMouseOut = (element) => {
         .tickPadding(10)
         .tickSize(0)
         const yAxis = d3.axisRight(yScale)
-        .tickSize(width - 120) 
+        .tickSize(width - 110) 
         .tickPadding(80)
         .ticks(5);
 
@@ -100,7 +99,6 @@ const handleMouseOut = (element) => {
         svg.selectAll("g.x.axis").selectAll("text")
           .style("font-size",`${fontLegend}px`)
           .style("fill", "#9B9EAC");
-console.log(fontLegend, "fontLESLEGENDSE");
        svg.selectAll("g.y.axis").selectAll("text")
           .style("font-size", fontLegend + "px")
           .style("fill", "#9B9EAC");

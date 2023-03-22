@@ -10,23 +10,23 @@ const updateDimensions = () => {
     case window.innerWidth > 1700:
       width = 960;
       height = 180;
-      fontLegend = 24;
-      tickPaded = 10;
-      tickSized = 10;
+      fontLegend = 14;
+      tickPaded = 80;
+      tickSized = 110;
       break;
     case window.innerWidth > 1400:
       width = 740;
       height = 180 * 0.82;
-      fontLegend = 36;
-      tickPaded = 10;
-      tickSized = 10;
+      fontLegend = 12;
+      tickPaded = 70;
+      tickSized = 90;
       break;
       case window.innerWidth > 1200:
       width = 600;
       height = 130;
-      fontLegend = 24;
-      tickPaded = 10;
-      tickSized = 10;
+      fontLegend = 10;
+      tickPaded = 60;
+      tickSized = 70;
       break;
     default:
       width = 200;
@@ -35,7 +35,10 @@ const updateDimensions = () => {
       tickPaded = 10;
       tickSized = 10;
   }
-console.log(fontLegend, "log fontLegend");
+  //reload the page if the window is resized
+  window.addEventListener("resize", () => {
+    window.location.reload();
+  });
   return { width, height, fontLegend, tickPaded, tickSized };
 };
 
