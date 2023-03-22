@@ -2,7 +2,10 @@ import * as d3 from 'd3';
 import { drawRoundedBar } from './formating/drawRoundedBar';
 import { formatDate } from './formating/formatDate';
 
-export const barLogic = (dataUserActivity, d3Container, width, height, tooltipRef) => {
+export const barLogic = (dataUserActivity, d3Container, width, height, fontLegend, tickPaded, tickSized, tooltipRef) => {
+  console.log(tickPaded);
+  console.log(fontLegend);
+  console.log(tickSized);
  const handleMouseOver = (element, d) => {
   d3.select(element)
     .attr("fill", "rgba(128, 128, 128, 0.3)");
@@ -95,11 +98,11 @@ const handleMouseOut = (element) => {
        
         //font size des légendes
         svg.selectAll("g.x.axis").selectAll("text")
-          .style("font-size", "14px")
+          .style("font-size",`${fontLegend}px`)
           .style("fill", "#9B9EAC");
-
+console.log(fontLegend, "fontLESLEGENDSE");
        svg.selectAll("g.y.axis").selectAll("text")
-          .style("font-size", "14px")
+          .style("font-size", fontLegend + "px")
           .style("fill", "#9B9EAC");
 
 

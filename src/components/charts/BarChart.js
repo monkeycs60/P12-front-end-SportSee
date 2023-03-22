@@ -5,23 +5,38 @@ import ovalRed from "../../assets/Oval-red.svg";
 import { barLogic } from '../../utils/barLogic';
 
 const updateDimensions = () => {
-  let width, height;
-
+  let width, height, fontLegend, tickPaded, tickSized;
   switch (true) {
     case window.innerWidth > 1700:
       width = 960;
       height = 180;
+      fontLegend = 24;
+      tickPaded = 10;
+      tickSized = 10;
       break;
     case window.innerWidth > 1400:
       width = 740;
       height = 180 * 0.82;
+      fontLegend = 36;
+      tickPaded = 10;
+      tickSized = 10;
+      break;
+      case window.innerWidth > 1200:
+      width = 600;
+      height = 130;
+      fontLegend = 24;
+      tickPaded = 10;
+      tickSized = 10;
       break;
     default:
       width = 200;
       height = 160;
+      fontLegend = 14;
+      tickPaded = 10;
+      tickSized = 10;
   }
-
-  return { width, height };
+console.log(fontLegend, "log fontLegend");
+  return { width, height, fontLegend, tickPaded, tickSized };
 };
 
 const BarChart = ({ dataUserActivity }) => {
@@ -31,12 +46,12 @@ const BarChart = ({ dataUserActivity }) => {
 
   useEffect(() => {
     if (dataUserActivity && d3Container.current) {
- const { width, height } = updateDimensions();
- barLogic(dataUserActivity, d3Container, width, height, tooltipRef);
+ const { width, height, fontLegend, tickPaded, tickSized } = updateDimensions();
+ barLogic(dataUserActivity, d3Container, width, height, fontLegend, tickPaded, tickSized, tooltipRef);
 
    const handleResize = () => {
-                const { width, height } = updateDimensions(); // Update dimensions on resize
-        barLogic(dataUserActivity, d3Container, width, height, tooltipRef);
+                const { width, height, fontLegend, tickPaded, tickSized } = updateDimensions(); // Update dimensions on resize
+        barLogic(dataUserActivity, d3Container, width, height, fontLegend, tickPaded, tickSized, tooltipRef);
       };
       window.addEventListener("resize", handleResize);
 
