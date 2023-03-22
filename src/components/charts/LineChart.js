@@ -28,11 +28,11 @@ const updateDimensions = () => {
       yPosition = 20;
       break;
     default:
-      width = 200;
-      height = 160;
+      width = 70;
+      height = 106;
       fontLegend = 12;
       xPosition = -20;
-      yPosition = -20;
+      yPosition = 15;
   }
 
   return { width, height, fontLegend, xPosition, yPosition };

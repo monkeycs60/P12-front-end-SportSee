@@ -32,9 +32,9 @@ const updateDimensions = () => {
       xAxisPos = -30;
       break;
     default:
-      width = 200;
-      height = 160;
-      fontLegend = 14;
+      width = 420;
+      height = 120;
+      fontLegend = 9;
       tickPaded = 10;
       tickSized = 10;
       xAxisPos = -20;

@@ -33,5 +33,9 @@ const NutrimentsStyle = styled.div`
     justify-content: space-between;
     background-color: white;
    padding: 20px 0;
-   margin-top: 10px
+   margin-top: 10px;
+
+  @media (max-width: 1200px) {
+    width: 22%;
+  }
     `;

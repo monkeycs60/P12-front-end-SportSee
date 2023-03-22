@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-export const radialLogic = (dataUserScore, svgRef, width, height, circleRadius) => {
+export const radialLogic = (dataUserScore, svgRef, width, height, circleRadius, chartText, scoreTextPosition) => {
   d3.select(svgRef.current).selectAll('*').remove();
 
     const score = dataUserScore.score;
@@ -43,7 +43,7 @@ export const radialLogic = (dataUserScore, svgRef, width, height, circleRadius) 
     circleGroup.append('text')
       .attr('text-anchor', 'middle')
       .attr('dy', '.3em')
-      .style('font-size', '24px')
+      .style('font-size', chartText + 'px')
       .text(`${Math.round(score * 100)}%`)
       .style("font-weight", "bold");
 
@@ -51,14 +51,14 @@ export const radialLogic = (dataUserScore, svgRef, width, height, circleRadius) 
     circleGroup.append('text')
       .attr('text-anchor', 'middle')
       .attr('dy', '30px')
-      .style('font-size', '14px')
+      .style('font-size', chartText * 0.75  + 'px')
       .text('de votre objectif');
 
     // "Score" text outside the circle
     svg.append('text')
-      .attr('x', 30) // Adjust this value to control the horizontal position of the text
-      .attr('y', 30) // Adjust this value to control the vertical position of the text
-      .style('font-size', '18px')
+      .attr('x', scoreTextPosition) // Adjust this value to control the horizontal position of the text
+      .attr('y', scoreTextPosition) // Adjust this value to control the vertical position of the text
+      .style('font-size', chartText * 0.85 + 'px')
       .text('Score');
 }
 

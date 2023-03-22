@@ -20,8 +20,8 @@ const updateDimensions = () => {
       height = 190;
       break;
     default:
-      width = 200;
-      height = 160;
+      width = 210;
+      height = 150;
   }
 
   return { width, height };
