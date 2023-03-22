@@ -18,6 +18,7 @@ const IndexGreetingsStyle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding: 0 1rem;
   div {
     font-size: 2rem;
     font-weight: 900;

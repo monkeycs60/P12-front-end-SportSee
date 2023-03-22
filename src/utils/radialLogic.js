@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-export const radialLogic = (dataUserScore, svgRef, width, height, circleRadius, chartText, scoreTextPosition) => {
+export const radialLogic = (dataUserScore, svgRef, width, height, circleRadius, chartText, scoreTextPosition, optionalRadius) => {
   d3.select(svgRef.current).selectAll('*').remove();
 
     const score = dataUserScore.score;
@@ -29,7 +29,7 @@ export const radialLogic = (dataUserScore, svgRef, width, height, circleRadius, 
     // Foreground arc (score)
     const scoreArc = d3.arc()
       .innerRadius(circleRadius) // Adjust this value to control the thickness of the arc
-      .outerRadius(circleRadius - 10)
+      .outerRadius(circleRadius - 10 + optionalRadius)
       .startAngle(0)
       .endAngle(-score * tau)
       .cornerRadius(10);

@@ -3,7 +3,7 @@ import { radialLogic } from '../../utils/radialLogic';
 import styled from "styled-components";
 
 const updateDimensions = () => {
-  let width, height, circleRadius, chartText, scoreTextPosition;
+  let width, height, circleRadius, chartText, scoreTextPosition, optionalRadius;
 
   switch (true) {
     case window.innerWidth > 1700:
@@ -33,9 +33,10 @@ const updateDimensions = () => {
       circleRadius = 90 * 0.82 * 0.60;
       chartText = 14;
       scoreTextPosition = 20;
+      optionalRadius = 2;
   }
 
-  return { width, height, circleRadius, chartText, scoreTextPosition };
+  return { width, height, circleRadius, chartText, scoreTextPosition, optionalRadius };
 };
 
 const RadialChart = ({ dataUserScore }) => {
@@ -44,12 +45,12 @@ const RadialChart = ({ dataUserScore }) => {
 
   useEffect(() => {
     if (dataUserScore && svgRef.current) {
-      const { width, height, circleRadius, chartText, scoreTextPosition } = updateDimensions();
-      radialLogic(dataUserScore, svgRef, width, height, circleRadius, chartText, scoreTextPosition);
+      const { width, height, circleRadius, chartText, scoreTextPosition, optionalRadius } = updateDimensions();
+      radialLogic(dataUserScore, svgRef, width, height, circleRadius, chartText, scoreTextPosition, optionalRadius);
 
       const handleResize = () => {
-                const { width, height, circleRadius, chartText, scoreTextPosition } = updateDimensions(); // Update dimensions on resize
-        radialLogic(dataUserScore, svgRef, width, height, circleRadius, chartText, scoreTextPosition);
+                const { width, height, circleRadius, chartText, scoreTextPosition, optionalRadius } = updateDimensions(); // Update dimensions on resize
+        radialLogic(dataUserScore, svgRef, width, height, circleRadius, chartText, scoreTextPosition, optionalRadius);
       };
       window.addEventListener("resize", handleResize);
 

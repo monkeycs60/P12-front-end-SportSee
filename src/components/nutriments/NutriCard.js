@@ -67,14 +67,14 @@ const NutriCardStyle = styled.div`
     height: 85px;
     // Your styles for the 1200px breakpoint go here
     img {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
     }
     h3 {
-      font-size: 14px;
+      font-size: 16px;
     }
     p {
-        font-size: 10px;
+        font-size: 12px;
     }
   }
     `;
