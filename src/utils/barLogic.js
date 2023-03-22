@@ -45,13 +45,13 @@ const handleMouseOut = (element) => {
   
         const borderRadius = 3;
         // We set up the svg container
-        const w = 840;
-        const h = 140;
+        // const w = 840;
+        // const h = 140;
 
       const svg = d3.select(d3Container.current);
         svg
-        .attr("width", w)
-        .attr("height", h)
+        .attr("width", width)
+        .attr("height", height)
         .style("background-color", "white")
         .style("overflow", "visible")
         .style("fill", "yellow");
@@ -60,7 +60,7 @@ const handleMouseOut = (element) => {
         const xScale = d3
         .scaleBand()
          .domain(dataUserActivity.sessions.map((d) => formatDate(d.day)))
-        .range([0, w])
+        .range([0, width])
         .padding(0);
 
         const yScale = d3

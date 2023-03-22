@@ -1,10 +1,26 @@
 import { useEffect, useRef } from "react";
 import { radialLogic } from '../../utils/radialLogic';
+import styled from "styled-components";
 
 const updateDimensions = () => {
-  const width = window.innerWidth > 1400 ? 300 : 200;
-  const height = window.innerWidth > 1400 ? 240 : 160;
-  return { width, height };
+  let width, height, circleRadius;
+
+  switch (true) {
+    case window.innerWidth > 1700:
+      width = 297.5;
+      height = 284;
+      circleRadius = 90;
+      break;
+    case window.innerWidth > 1400:
+      width = 300;
+      height = 240;
+      break;
+    default:
+      width = 200;
+      height = 160;
+  }
+
+  return { width, height, circleRadius };
 };
 
 const RadialChart = ({ dataUserScore }) => {
@@ -13,12 +29,12 @@ const RadialChart = ({ dataUserScore }) => {
 
   useEffect(() => {
     if (dataUserScore && svgRef.current) {
-      const { width, height } = updateDimensions();
-      radialLogic(dataUserScore, svgRef, width, height);
+      const { width, height, circleRadius } = updateDimensions();
+      radialLogic(dataUserScore, svgRef, width, height, circleRadius);
 
       const handleResize = () => {
-                const { width, height } = updateDimensions(); // Update dimensions on resize
-        radialLogic(dataUserScore, svgRef, width, height);
+                const { width, height, circleRadius } = updateDimensions(); // Update dimensions on resize
+        radialLogic(dataUserScore, svgRef, width, height, circleRadius);
       };
       window.addEventListener("resize", handleResize);
 
@@ -29,10 +45,14 @@ const RadialChart = ({ dataUserScore }) => {
   }, [dataUserScore]);
 
   return (
-    <div>
+    <StyledRadialChart>
       <svg ref={svgRef}></svg>
-    </div>
+    </StyledRadialChart>
   );
 };
 
 export default RadialChart;
+
+const StyledRadialChart = styled.div`
+  box-shadow: 0px 2px 4px 0px #00000005;
+  `;

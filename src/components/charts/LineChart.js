@@ -3,8 +3,22 @@ import styled from "styled-components";
 import { lineLogic } from '../../utils/lineLogic';
 
 const updateDimensions = () => {
-  const width = window.innerWidth > 1400 ? 300 : 200;
-  const height = window.innerWidth > 1400 ? 240 : 160;
+  let width, height;
+
+  switch (true) {
+    case window.innerWidth > 1700:
+      width = 217.5;
+      height = 240;
+      break;
+    case window.innerWidth > 1400:
+      width = 300;
+      height = 240;
+      break;
+    default:
+      width = 200;
+      height = 160;
+  }
+
   return { width, height };
 };
 

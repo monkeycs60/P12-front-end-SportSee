@@ -5,7 +5,7 @@ import ovalRed from "../../assets/Oval-red.svg";
 import { barLogic } from '../../utils/barLogic';
 
 const updateDimensions = () => {
-  const width = window.innerWidth > 1400 ? 300 : 200;
+  const width = window.innerWidth > 1400 ? 800 : 200;
   const height = window.innerWidth > 1400 ? 240 : 160;
   return { width, height };
 };
