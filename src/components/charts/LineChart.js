@@ -11,8 +11,8 @@ const updateDimensions = () => {
       height = 230;
       break;
     case window.innerWidth > 1400:
-      width = 300;
-      height = 240;
+      width = 160;
+      height = 196;
       break;
     default:
       width = 200;

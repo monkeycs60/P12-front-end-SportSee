@@ -9,12 +9,12 @@ const updateDimensions = () => {
 
   switch (true) {
     case window.innerWidth > 1700:
-      width = 1060;
+      width = 960;
       height = 180;
       break;
     case window.innerWidth > 1400:
-      width = 300;
-      height = 240;
+      width = 740;
+      height = 180 * 0.82;
       break;
     default:
       width = 200;
