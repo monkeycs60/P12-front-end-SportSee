@@ -27,4 +27,9 @@ const NutriCardStyle = styled.div`
         font-size: 20px;
         font-weight: 700;
     }
+    .txt {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
     `;

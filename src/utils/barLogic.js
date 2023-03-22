@@ -44,18 +44,14 @@ const handleMouseOut = (element) => {
 };
   
         const borderRadius = 3;
-        // We set up the svg container
-        // const w = 840;
-        // const h = 140;
-
+ 
       const svg = d3.select(d3Container.current);
         svg
         .attr("width", width)
         .attr("height", height)
-        .style("background-color", "white")
+        .style("background-color", "#E5E5E5")
         .style("overflow", "visible")
-        .style("fill", "yellow");
-
+  
         // We set up the scales
         const xScale = d3
         .scaleBand()
@@ -74,21 +70,22 @@ const handleMouseOut = (element) => {
         const xAxis = d3.axisBottom(xScale)
         .tickPadding(10)
         .tickSize(0)
-        // .tickSizeOuter(0);
         const yAxis = d3.axisRight(yScale)
-        .tickSize(width - 70) 
-        .tickPadding(30)
+        .tickSize(width - 120) 
+        .tickPadding(80)
         .ticks(5);
 
      // We set up the axis
         svg
         .append("g")
-        .attr("transform", `translate(-40, ${height})`)
+        .attr("transform", `translate(-50, ${height})`)
+        .attr("class", "x axis")
         .call(xAxis);
 
         const yAxisGroup = svg
         .append("g")
         .attr("transform", `translate(0, 0)`)
+        .attr("class", "y axis")
         .call(yAxis)
         .lower();
 
@@ -96,11 +93,23 @@ const handleMouseOut = (element) => {
         .selectAll("text")
         .attr("class", "y-axis");
        
-        svg.selectAll("g").selectAll("line").attr("stroke", "#DEDEDE");
+        //font size des légendes
+        svg.selectAll("g.x.axis").selectAll("text")
+          .style("font-size", "14px")
+          .style("fill", "#9B9EAC");
+
+       svg.selectAll("g.y.axis").selectAll("text")
+          .style("font-size", "14px")
+          .style("fill", "#9B9EAC");
+
+
+        svg.selectAll("g").selectAll("line").attr("stroke", "lightgrey");
         svg.selectAll("g").selectAll("line").lower();
         svg.selectAll("g").selectAll("line")
         .filter((d, i) => i !== 0)
         .attr("stroke-dasharray", "2,2")
+
+
 
         // calorie bar
      svg
@@ -141,8 +150,7 @@ const handleMouseOut = (element) => {
         svg.selectAll("g").selectAll("path.domain").attr("stroke", "none");
         svg.selectAll('g').selectAll('text').attr('margin', '50px')
 svg.selectAll('.y.axis') 
-    .selectAll('text')
-  .style("fill", "#E60000")   
+    .selectAll('text')  
 
   svg
   .selectAll(".hover-area")

@@ -9,8 +9,8 @@ const updateDimensions = () => {
 
   switch (true) {
     case window.innerWidth > 1700:
-      width = 1000;
-      height = 140;
+      width = 1060;
+      height = 180;
       break;
     case window.innerWidth > 1400:
       width = 300;
@@ -77,15 +77,15 @@ const GraphStyle = styled.div`
     width: 90%;
     padding: 10px 40px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: 30px;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     background-color: #E5E5E5;
     border-radius: 1rem;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
-    margin: 1rem;
-    gap: 16px;
+    margin: 0 1rem;
 
     .barchart-title {
         display: flex;
