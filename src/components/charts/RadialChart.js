@@ -12,6 +12,7 @@ const updateDimensions = () => {
       circleRadius = 90;
       chartText = 24;
       scoreTextPosition = 30;
+      optionalRadius = 0;
       break;
     case window.innerWidth > 1400:
       width = 240;
@@ -19,6 +20,7 @@ const updateDimensions = () => {
       circleRadius = 90 * 0.82 * 0.90;
       chartText = 20;
       scoreTextPosition = 25;
+      optionalRadius = 0;
       break;
     case window.innerWidth > 1200:
       width = 190;
@@ -26,6 +28,7 @@ const updateDimensions = () => {
       circleRadius = 90 * 0.82 * 0.82;
       chartText = 16;
       scoreTextPosition = 20;
+      optionalRadius = 0;
       break;
     default:
       width = 150;
