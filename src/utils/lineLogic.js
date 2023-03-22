@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { curveCatmullRom } from 'd3';
 
-export const lineLogic = (dataUserAverageSession, d3Container, width, height) => {
+export const lineLogic = (dataUserAverageSession, d3Container, width, height, fontLegend, xPosition, yPosition) => {
       d3.select(d3Container.current).selectAll("g").remove(); 
 
      const sessionsArray = Object.values(dataUserAverageSession.sessions);
@@ -147,23 +147,23 @@ const handleMouseOut = (event, d) => {
         .attr('stroke-width', 3)
         .attr('d', line)
 
-       
+       console.log(fontLegend, 'fontLegend');
           svg
         .append('text')
-        .attr('x', 0)
-        .attr('y', 40)
+        .attr('x', xPosition)
+        .attr('y', yPosition)
         .attr('text-anchor', 'start')
-        .attr('font-size', '18px')
+        .attr('font-size', fontLegend + 'px')
         .attr('fill', 'white')
         .attr('opacity', 0.7)
         .text( `Durée moyenne des`)
 
         svg
         .append('text')
-        .attr('x', 0)
-        .attr('y', 70)
+        .attr('x', xPosition)
+        .attr('y', yPosition + 30)
         .attr('text-anchor', 'start')
-        .attr('font-size', '18px')
+        .attr('font-size', fontLegend + 'px')
         .attr('fill', 'white')
         .attr('opacity', 0.7)
         .text( `sessions`)

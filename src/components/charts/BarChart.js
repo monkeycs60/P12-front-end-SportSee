@@ -5,7 +5,7 @@ import ovalRed from "../../assets/Oval-red.svg";
 import { barLogic } from '../../utils/barLogic';
 
 const updateDimensions = () => {
-  let width, height, fontLegend, tickPaded, tickSized;
+  let width, height, fontLegend, tickPaded, tickSized, xAxisPos;
   switch (true) {
     case window.innerWidth > 1700:
       width = 960;
@@ -13,20 +13,23 @@ const updateDimensions = () => {
       fontLegend = 14;
       tickPaded = 80;
       tickSized = 110;
+      xAxisPos = -50;
       break;
     case window.innerWidth > 1400:
       width = 740;
-      height = 180 * 0.82;
+      height = 140 * 0.82;
       fontLegend = 12;
-      tickPaded = 70;
-      tickSized = 90;
+      tickPaded = 60;
+      tickSized = 80;
+      xAxisPos = -40;
       break;
       case window.innerWidth > 1200:
-      width = 600;
-      height = 130;
+      width = 560;
+      height = 120;
       fontLegend = 10;
       tickPaded = 60;
       tickSized = 70;
+      xAxisPos = -30;
       break;
     default:
       width = 200;
@@ -34,12 +37,13 @@ const updateDimensions = () => {
       fontLegend = 14;
       tickPaded = 10;
       tickSized = 10;
+      xAxisPos = -20;
   }
   //reload the page if the window is resized
   window.addEventListener("resize", () => {
     window.location.reload();
   });
-  return { width, height, fontLegend, tickPaded, tickSized };
+  return { width, height, fontLegend, tickPaded, tickSized, xAxisPos };
 };
 
 const BarChart = ({ dataUserActivity }) => {
@@ -49,12 +53,12 @@ const BarChart = ({ dataUserActivity }) => {
 
   useEffect(() => {
     if (dataUserActivity && d3Container.current) {
- const { width, height, fontLegend, tickPaded, tickSized } = updateDimensions();
- barLogic(dataUserActivity, d3Container, width, height, fontLegend, tickPaded, tickSized, tooltipRef);
+ const { width, height, fontLegend, tickPaded, tickSized, xAxisPos } = updateDimensions();
+ barLogic(dataUserActivity, d3Container, width, height, fontLegend, tickPaded, tickSized, xAxisPos, tooltipRef);
 
    const handleResize = () => {
-                const { width, height, fontLegend, tickPaded, tickSized } = updateDimensions(); // Update dimensions on resize
-        barLogic(dataUserActivity, d3Container, width, height, fontLegend, tickPaded, tickSized, tooltipRef);
+                const { width, height, fontLegend, tickPaded, tickSized, xAxisPos } = updateDimensions(); // Update dimensions on resize
+        barLogic(dataUserActivity, d3Container, width, height, fontLegend, tickPaded, tickSized, xAxisPos, tooltipRef);
       };
       window.addEventListener("resize", handleResize);
 

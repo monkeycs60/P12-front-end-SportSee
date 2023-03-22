@@ -13,8 +13,13 @@ const updateDimensions = () => {
       break;
     case window.innerWidth > 1400:
       width = 240;
-      height = 240;
-      circleRadius = 90 * 0.82;
+      height = 170;
+      circleRadius = 90 * 0.82 * 0.90;
+      break;
+    case window.innerWidth > 1200:
+      width = 190;
+      height = 190;
+      circleRadius = 90 * 0.82 * 0.82;
       break;
     default:
       width = 200;

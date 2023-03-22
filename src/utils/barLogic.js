@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import { drawRoundedBar } from './formating/drawRoundedBar';
 import { formatDate } from './formating/formatDate';
 
-export const barLogic = (dataUserActivity, d3Container, width, height, fontLegend, tickPaded, tickSized, tooltipRef) => {
+export const barLogic = (dataUserActivity, d3Container, width, height, fontLegend, tickPaded, tickSized, xAxisPos, tooltipRef) => {
   console.log(tickPaded);
   console.log(tickSized);
  const handleMouseOver = (element, d) => {
@@ -73,14 +73,14 @@ const handleMouseOut = (element) => {
         .tickPadding(10)
         .tickSize(0)
         const yAxis = d3.axisRight(yScale)
-        .tickSize(width - 110) 
-        .tickPadding(80)
+        .tickSize(width - tickSized) 
+        .tickPadding(tickPaded)
         .ticks(5);
 
      // We set up the axis
         svg
         .append("g")
-        .attr("transform", `translate(-50, ${height})`)
+        .attr("transform", `translate(${xAxisPos}, ${height})`)
         .attr("class", "x axis")
         .call(xAxis);
 
