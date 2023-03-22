@@ -189,6 +189,7 @@ gradient.append("stop")
   .attr("offset", "100%")
   .attr("stop-color", "rgba(255, 0, 0, 0.5)")
   .attr("stop-opacity", 0);
+  
 
   // Add the gradient to the background
         svg.append("rect")
