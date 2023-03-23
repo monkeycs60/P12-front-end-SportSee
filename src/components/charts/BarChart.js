@@ -6,7 +6,7 @@ import { updateBarDimensions } from "../../utils/responsiveCharts/updateBarDimen
 import styled from "styled-components";
 
 const BarChart = ({ dataUserActivity }) => {
-
+console.log(dataUserActivity, "CECI EST POUR LES PROPTYPES");
     const d3Container = useRef(null);
     const tooltipRef = useRef(null);
 

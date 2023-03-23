@@ -147,7 +147,6 @@ const handleMouseOut = (event, d) => {
         .attr('stroke-width', 3)
         .attr('d', line)
 
-       console.log(fontLegend, 'fontLegend');
           svg
         .append('text')
         .attr('x', xPosition)

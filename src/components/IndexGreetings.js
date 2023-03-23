@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const IndexGreetings = ({ dataUser }) => {
-  console.log("ceci est data depuis Greetings", dataUser);
   return (
     <IndexGreetingsStyle>
       <div>

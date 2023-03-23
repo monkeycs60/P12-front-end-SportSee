@@ -30,7 +30,6 @@ export async function getDataUserScore(userId) {
 export async function getDataUserActivity(userId) {
   const response = await api.get(`/user/${userId}/activity`);
   const reformatedData = reformateActivity(response.data.data);
-  console.log(reformatedData, "reformatedACTIVITY");
   const activityData = new ActivityData(
     reformatedData
   );

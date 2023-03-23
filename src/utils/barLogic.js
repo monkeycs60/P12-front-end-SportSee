@@ -3,8 +3,6 @@ import { drawRoundedBar } from './formating/drawRoundedBar';
 import { formatDate } from './formating/formatDate';
 
 export const barLogic = (dataUserActivity, d3Container, width, height, fontLegend, tickPaded, tickSized, xAxisPos, tooltipRef) => {
-  console.log(tickPaded);
-  console.log(tickSized);
  const handleMouseOver = (element, d) => {
   d3.select(element)
     .attr("fill", "rgba(128, 128, 128, 0.3)");
