@@ -1,3 +1,8 @@
+/**
+Formats a given date string to DD-MM-YY format.
+@param {string} dateString - The date string to be formatted.
+@returns {string} The formatted date string in DD-MM-YY format.
+*/
 export function formatDate(dateString) {
   const date = new Date(dateString);
   const day = String(date.getDate()).padStart(2, '0');
