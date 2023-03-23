@@ -1,14 +1,30 @@
 import * as d3 from 'd3';
 import { curveCatmullRom } from 'd3';
 
+/**
+Renders a line chart of user activity sessions
+@param {Array} sessionsArray - An array of objects containing data about user activity sessions
+@param {Object} d3Container - A reference to the DOM element where the chart will be rendered
+@param {number} width - The width of the chart
+@param {number} height - The height of the chart
+@param {number} fontLegend - The font size of the chart legends
+@param {number} xPosition - The x position of the chart title
+@param {number} yPosition - The y position of the chart title
+*/
 export const lineLogic = (sessionsArray, d3Container, width, height, fontLegend, xPosition, yPosition) => {
-      d3.select(d3Container.current).selectAll("g").remove(); 
+  /**
+Removes all existing SVG elements in the container element
+*/    
+  d3.select(d3Container.current).selectAll("g").remove(); 
 
       //this is the array of days of the week, starting by 0 = Sunday
       const dayOfWeek = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];  
 
-      // implement tooltip
-      const showTooltip = (event, d) => {
+/**
+Displays a tooltip with the session length when hovering over a data point
+@param {Object} event - The mouseover event
+@param {Object} d - The data associated with the hovered data point
+*/      const showTooltip = (event, d) => {
   const tooltip = d3.select(d3Container.current.parentElement).select(".tooltip");
   tooltip
     .style("display", "inline")
@@ -21,12 +37,19 @@ export const lineLogic = (sessionsArray, d3Container, width, height, fontLegend,
     
 };
 
+/**
+Hides the tooltip when the mouse leaves the data point
+*/
 const hideTooltip = () => {
   const tooltip = d3.select(d3Container.current.parentElement).select(".tooltip");
   tooltip.style("display", "none");
 
 };
 
+/**
+Updates the gradient color based on the x position of the hovered data point
+@param {number} xPos - The x position of the hovered data point
+*/
 const updateGradient = (xPos) => {
   gradient.select(".stop1")
     .attr("offset", `${(1 - (xPos) / (width + margin.left + margin.right)) * 100}%`)
@@ -37,7 +60,11 @@ const updateGradient = (xPos) => {
     .attr("stop-color", "rgba(128, 0, 0, 0)");
 };
 
-// circle on hover
+/**
+Handles the mouseover event of a data point
+@param {Object} event - The mouseover event
+@param {Object} d - The data associated with the hovered data point
+*/
 const handleMouseOver = (event, d) => {
    const xPos = x(d.day) + margin.left; // Add margin.left to account for the translation
   updateGradient(xPos);
@@ -75,6 +102,12 @@ const handleMouseOver = (event, d) => {
   showTooltip(event, d);
 };
 
+/**
+Handles mouse out event.
+@param {MouseEvent} event - The mouse event.
+@param {Object} d - The data object.
+@returns {void}
+*/
 const handleMouseOut = (event, d) => {
   svg.select(".gradient-bg").attr("opacity", 0);
 
@@ -213,5 +246,4 @@ gradient.append("stop")
   .on("mouseover", handleMouseOver)
   .on("mousemove", showTooltip)
   .on("mouseout", handleMouseOut);
-
     }

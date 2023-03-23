@@ -2,7 +2,30 @@ import * as d3 from 'd3';
 import { drawRoundedBar } from './formating/drawRoundedBar';
 import { formatDate } from './formating/formatDate';
 
+/**
+
+Draws a bar chart with rounded bars and tooltips for data visualization.
+@function
+@param {Array} dataUserActivity - An array of objects containing user activity data.
+@param {Object} d3Container - A reference to the D3 container to which the chart will be rendered.
+@param {number} width - The width of the chart.
+@param {number} height - The height of the chart.
+@param {number} fontLegend - The font size of the axis legends.
+@param {number} tickPaded - The padding between ticks on the Y axis.
+@param {number} tickSized - The size of the ticks on the Y axis.
+@param {number} xAxisPos - The position of the X axis.
+@param {Object} tooltipRef - A reference to the tooltip element.
+@returns {void}
+*/
 export const barLogic = (dataUserActivity, d3Container, width, height, fontLegend, tickPaded, tickSized, xAxisPos, tooltipRef) => {
+
+  /** 
+Handles the mouseover event of the chart bars.
+@function
+@param {Element} element - The element being hovered over.
+@param {Object} d - The data object of the hovered bar.
+@returns {void}
+*/
  const handleMouseOver = (element, d) => {
   d3.select(element)
     .attr("fill", "rgba(128, 128, 128, 0.3)");
@@ -17,6 +40,12 @@ export const barLogic = (dataUserActivity, d3Container, width, height, fontLegen
     .html(formatTooltipContent(d));
 };
 
+/**
+Handles the mousemove event of the chart bars.
+@function
+@param {Event} event - The mousemove event.
+@returns {void}
+*/
 const handleMouseMove = (event) => {
   const tooltipWidth = tooltipRef.current.clientWidth;
   const tooltipHeight = tooltipRef.current.clientHeight;
@@ -28,6 +57,12 @@ const handleMouseMove = (event) => {
     .style("top", `${event.pageY - tooltipHeight - offsetY}px`);
 };
 
+/**
+Handles the mouseout event of the chart bars.
+@function
+@param {Element} element - The element being hovered over.
+@returns {void}
+*/
 const handleMouseOut = (element) => {
   d3.select(element)
     .attr("fill", "transparent");
@@ -35,7 +70,13 @@ const handleMouseOut = (element) => {
   d3.select(tooltipRef.current).style("display", "none");
 };
 
-      const formatTooltipContent = (d) => {
+/**
+Formats the content of the tooltip for a given data object.
+@function
+@param {Object} d - The data object for which the tooltip content will be formatted.
+@returns {string} The formatted tooltip content.
+*/
+const formatTooltipContent = (d) => {
   return `
     ${d.kilogram}kg<br />
     <br />
