@@ -1,42 +1,7 @@
 import { useEffect, useRef } from "react";
-import styled from "styled-components";
 import { lineLogic } from '../../utils/lineLogic';
-
-const updateDimensions = () => {
-  let width, height, fontLegend, xPosition, yPosition;
-
-  switch (true) {
-    case window.innerWidth > 1700:
-      width = 227.5;
-      height = 230;
-      fontLegend = 18;
-      xPosition = 0;
-      yPosition = 40;
-      break;
-    case window.innerWidth > 1400:
-      width = 160;
-      height = 126;
-      fontLegend = 16;
-      xPosition = -10;
-      yPosition = 30;
-      break;
-      case window.innerWidth > 1200:
-      width = 110;
-      height = 146;
-      fontLegend = 14;
-      xPosition = -20;
-      yPosition = 20;
-      break;
-    default:
-      width = 70;
-      height = 106;
-      fontLegend = 12;
-      xPosition = -20;
-      yPosition = 15;
-  }
-
-  return { width, height, fontLegend, xPosition, yPosition };
-};
+import { updateLineDimensions } from "../../utils/responsiveCharts/updateLineDimensions";
+import styled from "styled-components";
 
 
 const LineChart = ({ dataUserAverageSession }) => {
@@ -44,11 +9,11 @@ const LineChart = ({ dataUserAverageSession }) => {
 
   useEffect(() => {
     if (dataUserAverageSession && d3Container.current) {
-     const { width, height, fontLegend, xPosition, yPosition } = updateDimensions();
+     const { width, height, fontLegend, xPosition, yPosition } = updateLineDimensions();
      lineLogic(dataUserAverageSession, d3Container, width, height, fontLegend, xPosition, yPosition);
 
         const handleResize = () => {
-      const { width, height } = updateDimensions();
+      const { width, height } = updateLineDimensions();
       lineLogic(dataUserAverageSession, d3Container, width, height, fontLegend, xPosition, yPosition);
     };
   window.addEventListener("resize", handleResize);
