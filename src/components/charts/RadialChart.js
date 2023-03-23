@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { radialLogic } from '../../utils/radialLogic';
 import { updateRadialDimensions } from "../../utils/responsiveCharts/updateRadialDimensions";
 import styled from "styled-components";
+import PropTypes from 'prop-types';
 
 const RadialChart = ({ dataUserScore }) => {
   const svgRef = useRef(null);
@@ -29,6 +30,12 @@ const RadialChart = ({ dataUserScore }) => {
       <svg ref={svgRef}></svg>
     </StyledRadialChart>
   );
+};
+
+RadialChart.propTypes = {
+  dataUserScore: PropTypes.shape({
+    score: PropTypes.number,
+  })
 };
 
 export default RadialChart;

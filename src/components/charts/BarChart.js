@@ -4,9 +4,9 @@ import ovalRed from "../../assets/Oval-red.svg";
 import { barLogic } from '../../utils/barLogic';
 import { updateBarDimensions } from "../../utils/responsiveCharts/updateBarDimensions";
 import styled from "styled-components";
+import PropTypes from 'prop-types';
 
 const BarChart = ({ dataUserActivity }) => {
-console.log(dataUserActivity, "CECI EST POUR LES PROPTYPES");
     const d3Container = useRef(null);
     const tooltipRef = useRef(null);
 
@@ -50,6 +50,17 @@ console.log(dataUserActivity, "CECI EST POUR LES PROPTYPES");
         </GraphStyle>
     );
     };
+
+
+BarChart.propTypes = {
+  dataUserActivity: PropTypes.shape({
+    sessions: PropTypes.arrayOf(PropTypes.shape({
+      day: PropTypes.string,
+      kilogram: PropTypes.number,
+      calories: PropTypes.number,
+    }))
+  }),
+};
 
 export default BarChart;
 

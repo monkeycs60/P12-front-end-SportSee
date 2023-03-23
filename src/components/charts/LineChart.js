@@ -2,35 +2,48 @@ import { useEffect, useRef } from "react";
 import { lineLogic } from '../../utils/lineLogic';
 import { updateLineDimensions } from "../../utils/responsiveCharts/updateLineDimensions";
 import styled from "styled-components";
-
+import PropTypes from 'prop-types';
 
 const LineChart = ({ dataUserAverageSession }) => {
+  console.log(dataUserAverageSession);
   const d3Container = useRef(null);
 
   useEffect(() => {
-    if (dataUserAverageSession && d3Container.current) {
+    if (dataUserAverageSession && dataUserAverageSession.sessions && d3Container.current) {
      const { width, height, fontLegend, xPosition, yPosition } = updateLineDimensions();
-     lineLogic(dataUserAverageSession, d3Container, width, height, fontLegend, xPosition, yPosition);
+     const sessionsArray = Object.values(dataUserAverageSession.sessions);
+     console.log(sessionsArray);
+     lineLogic(sessionsArray, d3Container, width, height, fontLegend, xPosition, yPosition);
 
-        const handleResize = () => {
+     const handleResize = () => {
       const { width, height } = updateLineDimensions();
-      lineLogic(dataUserAverageSession, d3Container, width, height, fontLegend, xPosition, yPosition);
+      lineLogic(sessionsArray, d3Container, width, height, fontLegend, xPosition, yPosition);
     };
   window.addEventListener("resize", handleResize);
 
   return () => {
-      window.removeEventListener("resize", handleResize);
+    window.removeEventListener("resize", handleResize);
   };
+  
+}
+}, [dataUserAverageSession]);
 
-    }
-  }, [dataUserAverageSession]);
 
-  return (
-    <StyledLineChart>
+return (
+  <StyledLineChart>
       <div className="tooltip"></div>
       <svg ref={d3Container}></svg>
     </StyledLineChart>
   );
+};
+
+LineChart.propTypes = {
+dataUserAverageSession: PropTypes.shape({
+  sessions: PropTypes.shape({
+    day: PropTypes.number,
+    sessionLength: PropTypes.number,
+  })
+}),
 };
 
 export default LineChart;

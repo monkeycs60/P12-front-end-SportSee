@@ -1,10 +1,8 @@
 import * as d3 from 'd3';
 import { curveCatmullRom } from 'd3';
 
-export const lineLogic = (dataUserAverageSession, d3Container, width, height, fontLegend, xPosition, yPosition) => {
+export const lineLogic = (sessionsArray, d3Container, width, height, fontLegend, xPosition, yPosition) => {
       d3.select(d3Container.current).selectAll("g").remove(); 
-
-     const sessionsArray = Object.values(dataUserAverageSession.sessions);
 
       //this is the array of days of the week, starting by 0 = Sunday
       const dayOfWeek = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];  
