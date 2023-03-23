@@ -4,7 +4,7 @@ import glucidesIcon from "../../assets/carbs-icon.svg";
 import lipidesIcon from "../../assets/fat-icon.svg";
 import proteinesIcon from "../../assets/protein-icon.svg";
 import NutriCard from "./NutriCard";
-
+import PropTypes from 'prop-types';
 
 const Nutriments = ({ dataUser }) => {
   
@@ -22,6 +22,15 @@ const Nutriments = ({ dataUser }) => {
         </NutrimentsStyle>
 
     )
+};
+
+Nutriments.propTypes = {
+  dataUser: PropTypes.shape({
+    Calories: PropTypes.number,
+    Glucides: PropTypes.number,
+    Lipides: PropTypes.number,
+    Proteines: PropTypes.number,
+  }),
 };
 
 export default Nutriments

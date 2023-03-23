@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import PropTypes from 'prop-types';
 
 const IndexGreetings = ({ dataUser }) => {
+  console.log(dataUser);
   return (
     <IndexGreetingsStyle>
       <div>
@@ -9,6 +11,20 @@ const IndexGreetings = ({ dataUser }) => {
       <p>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
     </IndexGreetingsStyle>
   );
+};
+
+IndexGreetings.propTypes = {
+  dataUser: PropTypes.shape({
+    id: PropTypes.number,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    age: PropTypes.number,
+    score: PropTypes.number,
+    Calories: PropTypes.number,
+    Glucides: PropTypes.number,
+    Lipides: PropTypes.number,
+    Proteines: PropTypes.number,
+  }),
 };
 
 export default IndexGreetings;

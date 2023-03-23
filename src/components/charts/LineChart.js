@@ -5,7 +5,6 @@ import styled from "styled-components";
 import PropTypes from 'prop-types';
 
 const LineChart = ({ dataUserAverageSession }) => {
-  console.log(dataUserAverageSession);
   const d3Container = useRef(null);
 
   useEffect(() => {

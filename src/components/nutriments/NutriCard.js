@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import PropTypes from 'prop-types';
 
 const NutriCard = ({ nutriName, nutriScore, nutriUnit, icon }) => {
     return (
@@ -11,6 +12,13 @@ const NutriCard = ({ nutriName, nutriScore, nutriUnit, icon }) => {
       </NutriCardStyle>
     );
     };
+
+    NutriCard.propTypes = {
+  nutriName: PropTypes.string.isRequired,
+  nutriScore: PropTypes.number.isRequired,
+  nutriUnit: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+};
 
 export default NutriCard;
 
