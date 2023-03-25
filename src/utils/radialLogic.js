@@ -1,5 +1,17 @@
 import * as d3 from 'd3';
 
+/**
+Generates a radial chart using D3.js library.
+@param {Object} dataUserScore - An object containing user score data.
+@param {Object} svgRef - A reference to the SVG element.
+@param {number} width - The width of the chart in pixels.
+@param {number} height - The height of the chart in pixels.
+@param {number} circleRadius - The radius of the circle in pixels.
+@param {number} chartText - The font size of the chart text in pixels.
+@param {number} scoreTextPosition - The position of the "Score" text in pixels.
+@param {number} optionalRadius - The optional radius of the arc in pixels.
+@returns {void}
+*/
 export const radialLogic = (dataUserScore, svgRef, width, height, circleRadius, chartText, scoreTextPosition, optionalRadius) => {
   d3.select(svgRef.current).selectAll('*').remove();
 
@@ -14,7 +26,6 @@ export const radialLogic = (dataUserScore, svgRef, width, height, circleRadius, 
     const svg = d3.select(svgRef.current)
       .attr('width', width) 
       .attr('height', height)
-      // .style('background-color', '#FBFBFB');
       
     // Create a group element to contain the circle and text
     const circleGroup = svg.append('g')

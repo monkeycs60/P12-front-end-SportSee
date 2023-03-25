@@ -3,8 +3,7 @@ import { drawRoundedBar } from './formating/drawRoundedBar';
 import { formatDate } from './formating/formatDate';
 
 /**
-
-Draws a bar chart with rounded bars and tooltips for data visualization.
+Draws a bar chart with rounded bars and tooltips for data visualization using D3
 @function
 @param {Array} dataUserActivity - An array of objects containing user activity data.
 @param {Object} d3Container - A reference to the D3 container to which the chart will be rendered.

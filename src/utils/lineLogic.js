@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import { curveCatmullRom } from 'd3';
 
 /**
-Renders a line chart of user activity sessions
+Renders a line chart of user activity sessions with a tooltip using D3
 @param {Array} sessionsArray - An array of objects containing data about user activity sessions
 @param {Object} d3Container - A reference to the DOM element where the chart will be rendered
 @param {number} width - The width of the chart

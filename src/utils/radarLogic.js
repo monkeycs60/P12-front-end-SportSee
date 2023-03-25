@@ -1,5 +1,14 @@
 import * as d3 from 'd3';
 
+/**
+Generates a radar chart using D3
+@param {number} width - The width of the chart in pixels.
+@param {number} height - The height of the chart in pixels.
+@param {Object} dataUserPerformance - An object containing user performance data.
+@param {Object} chartRef - A reference to the chart element.
+@param {number} levels - The number of levels in the chart.
+@returns {void}
+*/
 export const radarLogic = (width, height, dataUserPerformance, chartRef, levels) => {
   if (dataUserPerformance) {
     d3.select(chartRef.current).selectAll('*').remove();
