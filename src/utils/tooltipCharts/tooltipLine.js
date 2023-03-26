@@ -4,6 +4,7 @@ import * as d3 from "d3";
 Displays a tooltip with the session length when hovering over a data point
 @param {Object} event - The mouseover event
 @param {Object} d - The data associated with the hovered data point
+@param {Object} d3Container - The d3 container
 */      
  export const showTooltip = (event, d, d3Container) => {
   const tooltip = d3.select(d3Container.current.parentElement).select(".tooltip");
@@ -20,6 +21,7 @@ Displays a tooltip with the session length when hovering over a data point
 
 /**
 Hides the tooltip when the mouse leaves the data point
+@param {Object} d3Container - The d3 container
 */
 export const hideTooltip = (d3Container) => {
   const tooltip = d3.select(d3Container.current.parentElement).select(".tooltip");
@@ -29,6 +31,9 @@ export const hideTooltip = (d3Container) => {
 /**
 Updates the gradient color based on the x position of the hovered data point
 @param {number} xPos - The x position of the hovered data point
+@param {Object} gradient - The gradient object
+@param {number} width - The width of the chart
+@param {Object} margin - The margin of the chart
 */
 export const updateGradient = (xPos, gradient, width, margin) => {
   gradient.select(".stop1")
@@ -44,6 +49,12 @@ export const updateGradient = (xPos, gradient, width, margin) => {
 Handles the mouseover event of a data point
 @param {Object} event - The mouseover event
 @param {Object} d - The data associated with the hovered data point
+@param {Object} x - The x scale
+@param {Object} margin - The margin of the chart
+@param {Object} gradient - The gradient object
+@param {number} width - The width of the chart
+@param {Object} svg - The svg object
+@param {Object} d3Container - The d3 container
 */
 export const handleMouseOver = (event, d, x, margin, gradient, width, svg, d3Container) => {
    const xPos = x(d.day) + margin.left; // Add margin.left to account for the translation
@@ -85,7 +96,8 @@ export const handleMouseOver = (event, d, x, margin, gradient, width, svg, d3Con
 /**
 Handles mouse out event.
 @param {MouseEvent} event - The mouse event.
-@param {Object} d - The data object.
+@param {Object} svg - The svg object.
+@param {Object} d3Container - The d3 container.
 @returns {void}
 */
 export const handleMouseOut = (event, svg, d3Container) => {

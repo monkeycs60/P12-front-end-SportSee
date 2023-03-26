@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { drawRoundedBar } from './formating/drawRoundedBar';
 import { formatDate } from './formating/formatDate';
-import { handleMouseOver, handleMouseMove, handleMouseOut, formatTooltipContent } from './tooltipCharts/tooltipBar';
+import { handleMouseOver, handleMouseMove, handleMouseOut } from './tooltipCharts/tooltipBar';
 
 /**
 Draws a bar chart with rounded bars and tooltips for data visualization using D3
