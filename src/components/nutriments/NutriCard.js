@@ -1,3 +1,14 @@
+/**
+Represents a nutritional information card component of the application.
+@function
+@param {object} props - The props that are passed to the component.
+@param {string} props.nutriName - The name of the nutritional value.
+@param {number} props.nutriScore - The score of the nutritional value.
+@param {string} props.nutriUnit - The unit of the nutritional value.
+@param {string} props.icon - The icon of the nutritional value.
+@return {JSX.Element} JSX representation of the nutritional information card component.
+*/
+
 import styled from "styled-components";
 import PropTypes from 'prop-types';
 

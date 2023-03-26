@@ -1,3 +1,9 @@
+/**
+Represents the header component of the application.
+@function
+@return {JSX.Element} JSX representation of the header component
+*/
+
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import React from "react";

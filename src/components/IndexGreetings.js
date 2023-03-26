@@ -1,8 +1,24 @@
+/**
+Represents a component displaying greetings and goals achievement of the user.
+@function
+@param {object} props - The props that are passed to the component.
+@param {object} props.dataUser - The data of the user.
+@param {number} props.dataUser.id - The id of the user.
+@param {string} props.dataUser.firstName - The first name of the user.
+@param {string} props.dataUser.lastName - The last name of the user.
+@param {number} props.dataUser.age - The age of the user.
+@param {number} props.dataUser.score - The score of the user.
+@param {number} props.dataUser.Calories - The calories of the user.
+@param {number} props.dataUser.Glucides - The glucides of the user.
+@param {number} props.dataUser.Lipides - The lipides of the user.
+@param {number} props.dataUser.Proteines - The proteins of the user.
+@return {JSX.Element} JSX representation of the greetings and goals achievement component.
+*/
+
 import styled from "styled-components";
 import PropTypes from 'prop-types';
 
 const IndexGreetings = ({ dataUser }) => {
-  console.log(dataUser);
   return (
     <IndexGreetingsStyle>
       <div>

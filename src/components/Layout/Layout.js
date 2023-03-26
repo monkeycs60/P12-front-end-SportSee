@@ -1,3 +1,11 @@
+/**
+Represents the layout component of the application.
+@function
+@param {object} props - The props that are passed to the component.
+@param {React.ReactNode} props.children - The children elements to be rendered.
+@return {JSX.Element} JSX representation of the layout component
+*/
+
 import React from "react";
 import Header from "./Header/Header";
 import SideBar from "./SideBar/SideBar";

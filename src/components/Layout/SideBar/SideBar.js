@@ -1,3 +1,9 @@
+/**
+Represents the sidebar component of the application.
+@function
+@return {JSX.Element} JSX representation of the sidebar component
+*/
+
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as Muscu } from "./../../../assets/muscu.svg";

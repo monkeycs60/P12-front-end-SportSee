@@ -1,3 +1,8 @@
+/**
+Returns an object with updated dimensions based on the current window size for a radial chart.
+@returns {Object} An object containing updated width, height, circleRadius, chartText, scoreTextPosition, and optionalRadius values.
+*/
+
 export const updateRadialDimensions = () => {
   let width, height, circleRadius, chartText, scoreTextPosition, optionalRadius;
 

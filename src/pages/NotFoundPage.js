@@ -1,3 +1,9 @@
+/**
+Represents the component for the "Not Found" page of the application.
+@function
+@return {JSX.Element} JSX representation of the "Not Found" page
+*/
+
 import { Link } from "react-router-dom";
 
 const NotFoundPage = () => {

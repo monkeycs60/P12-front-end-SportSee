@@ -1,19 +1,9 @@
-import {
-  getDataUser,
-  getDataUserActivity,
-  getDataUserAverageSession,
-  getDataUserPerformance,
-} from "./services/apiService";
-import { useState, useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFoundPage from "./pages/NotFoundPage";
 import Layout from "./components/Layout/Layout";
 
 const App = () => {
-  
-
-  
 
   return (
     <Layout>

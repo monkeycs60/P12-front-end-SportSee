@@ -1,3 +1,15 @@
+/**
+Represents a nutritional information component of the application.
+@function
+@param {object} props - The props that are passed to the component.
+@param {object} props.dataUser - The nutritional data of the user.
+@param {number} props.dataUser.Calories - The calories of the user.
+@param {number} props.dataUser.Glucides - The glucides of the user.
+@param {number} props.dataUser.Lipides - The lipides of the user.
+@param {number} props.dataUser.Proteines - The proteins of the user.
+@return {JSX.Element} JSX representation of the nutritional information component.
+*/
+
 import styled from "styled-components";
 import caloriesIcon from "../../assets/calories-icon.svg";
 import glucidesIcon from "../../assets/carbs-icon.svg";

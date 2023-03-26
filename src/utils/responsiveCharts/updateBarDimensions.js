@@ -1,3 +1,15 @@
+/**
+ * Updates the dimensions of the bar chart based on the width of the window.
+ * @function
+ * @return {object} An object containing the updated chart dimensions.
+ * @property {number} width - The updated width of the chart.
+ * @property {number} height - The updated height of the chart.
+ * @property {number} fontLegend - The updated font size for the chart legend.
+ * @property {number} tickPaded - The updated padding between the chart ticks.
+ * @property {number} tickSized - The updated size of the chart ticks.
+ * @property {number} xAxisPos - The updated position of the chart's x-axis.
+ */
+
 export const updateBarDimensions = () => {
   let width, height, fontLegend, tickPaded, tickSized, xAxisPos;
   switch (true) {

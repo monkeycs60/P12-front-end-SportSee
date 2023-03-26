@@ -1,3 +1,11 @@
+/**
+ * Updates the dimensions of the radar chart based on the width of the window.
+ * @function
+ * @return {object} An object containing the updated chart dimensions.
+ * @property {number} width - The updated width of the chart.
+ * @property {number} height - The updated height of the chart.
+ */
+
 export const updateRadarDimensions = () => {
   let width, height;
 
