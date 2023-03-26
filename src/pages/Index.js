@@ -1,3 +1,10 @@
+/**
+@file This file exports the Index component that renders the main dashboard page.
+It fetches data from the API and displays it using various charts and components.
+@author [monkeycs60]
+@see {@link https://github.com/monkeycs60/P12-front-end-SportSee} for the repository of this project.
+*/
+
 import styled from "styled-components";
 import IndexGreetings from "../components/IndexGreetings";
 import {
@@ -20,7 +27,11 @@ import {
   USER_PERFORMANCE
 } from "../data/data"
 
-
+/**
+Index component that renders the main dashboard page.
+It fetches data from the API and displays it using various charts and components.
+@component
+*/
 const Index = () => {
   const [dataUser, setDataUser] = useState(null);
   const [dataUserActivity, setDataUserActivity] = useState(null);
@@ -28,6 +39,11 @@ const Index = () => {
   const [dataUserPerformance, setDataUserPerformance] = useState(null);
   const [dataUserScore, setDataUserScore] = useState(null);
 
+  /**
+A hook that fetches data from the API when the component mounts.
+@function
+@async
+*/
    useEffect(() => {
  async function fetchData() {
   try {
