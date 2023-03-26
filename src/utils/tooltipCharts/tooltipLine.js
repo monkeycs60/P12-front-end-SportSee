@@ -5,7 +5,7 @@ Displays a tooltip with the session length when hovering over a data point
 @param {Object} event - The mouseover event
 @param {Object} d - The data associated with the hovered data point
 */      
- export const showTooltip = (event, d) => {
+ export const showTooltip = (event, d, d3Container) => {
   const tooltip = d3.select(d3Container.current.parentElement).select(".tooltip");
   tooltip
     .style("display", "inline")
@@ -21,17 +21,16 @@ Displays a tooltip with the session length when hovering over a data point
 /**
 Hides the tooltip when the mouse leaves the data point
 */
-export const hideTooltip = () => {
+export const hideTooltip = (d3Container) => {
   const tooltip = d3.select(d3Container.current.parentElement).select(".tooltip");
   tooltip.style("display", "none");
-
 };
 
 /**
 Updates the gradient color based on the x position of the hovered data point
 @param {number} xPos - The x position of the hovered data point
 */
-export const updateGradient = (xPos) => {
+export const updateGradient = (xPos, gradient, width, margin) => {
   gradient.select(".stop1")
     .attr("offset", `${(1 - (xPos) / (width + margin.left + margin.right)) * 100}%`)
     .attr("stop-color", "rgba(128, 0, 0, 0.5)");
@@ -46,9 +45,9 @@ Handles the mouseover event of a data point
 @param {Object} event - The mouseover event
 @param {Object} d - The data associated with the hovered data point
 */
-export const handleMouseOver = (event, d) => {
+export const handleMouseOver = (event, d, x, margin, gradient, width, svg, d3Container) => {
    const xPos = x(d.day) + margin.left; // Add margin.left to account for the translation
-  updateGradient(xPos);
+  updateGradient(xPos, gradient, width, margin);
   
  gradient.select(".stop1")
     .attr("offset", `${(1 - (xPos) / (width + margin.left + margin.right)) * 100}%`)
@@ -80,7 +79,7 @@ export const handleMouseOver = (event, d) => {
       return "url(#radial-gradient)";
     });
 
-  showTooltip(event, d);
+  showTooltip(event, d, d3Container);
 };
 
 /**
@@ -89,7 +88,7 @@ Handles mouse out event.
 @param {Object} d - The data object.
 @returns {void}
 */
-export const handleMouseOut = (event, d) => {
+export const handleMouseOut = (event, svg, d3Container) => {
   svg.select(".gradient-bg").attr("opacity", 0);
 
   d3.select(event.currentTarget)
@@ -99,5 +98,5 @@ export const handleMouseOut = (event, d) => {
     .attr("opacity", "0")
     .attr("fill", "white");
 
-  hideTooltip();
+  hideTooltip(d3Container);
 };

@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import { curveCatmullRom } from 'd3';
+import { showTooltip, handleMouseOver, handleMouseOut } from './tooltipCharts/tooltipLine';
 
 /**
 Renders a line chart of user activity sessions with a tooltip using D3
@@ -144,7 +145,7 @@ gradient.append("stop")
   .attr("r", 20)
   .attr("fill", "white")
   .attr("opacity", 0) // Make the circles invisible, but still interactive
-  .on("mouseover", handleMouseOver)
-  .on("mousemove", showTooltip)
-  .on("mouseout", handleMouseOut);
+  .on("mouseover", (event, d) => handleMouseOver(event, d, x, margin, gradient, width, svg, d3Container))
+  .on("mousemove", (event, d) => showTooltip (event, d, d3Container))
+  .on("mouseout", (event) => handleMouseOut(event, svg, d3Container));
     }
