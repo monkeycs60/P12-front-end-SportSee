@@ -3,6 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Test change commit - avec OC
+Il s'agit d'une mise à jour de la branche master
 
 ## Available Scripts
 
