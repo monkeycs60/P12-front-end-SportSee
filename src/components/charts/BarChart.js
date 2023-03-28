@@ -1,3 +1,10 @@
+/**
+BarChart component displays a bar chart with user activity data
+@param {object} dataUserActivity - An object containing an array of user activity sessions
+@param {array} dataUserActivity.sessions - Array of user activity sessions containing day, kilogram, and calories data
+@returns {JSX.Element} - Returns a React component for displaying a bar chart
+*/
+
 import { useEffect, useRef } from "react";
 import oval from "../../assets/Oval.svg";
 import ovalRed from "../../assets/Oval-red.svg";

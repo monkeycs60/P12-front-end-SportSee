@@ -1,3 +1,10 @@
+/**
+LineChart component displays a line chart with user average session data
+@param {object} dataUserAverageSession - An object containing an array of user average session data
+@param {object} dataUserAverageSession.sessions - An object containing user average session data with day and sessionLength properties
+@returns {JSX.Element} - Returns a React component for displaying a line chart
+*/
+
 import { useEffect, useRef } from "react";
 import { lineLogic } from '../../utils/lineLogic';
 import { updateLineDimensions } from "../../utils/responsiveCharts/updateLineDimensions";
@@ -11,7 +18,6 @@ const LineChart = ({ dataUserAverageSession }) => {
     if (dataUserAverageSession && dataUserAverageSession.sessions && d3Container.current) {
      const { width, height, fontLegend, xPosition, yPosition } = updateLineDimensions();
      const sessionsArray = Object.values(dataUserAverageSession.sessions);
-     console.log(sessionsArray);
      lineLogic(sessionsArray, d3Container, width, height, fontLegend, xPosition, yPosition);
 
      const handleResize = () => {

@@ -1,3 +1,10 @@
+/**
+RadialChart component displays a radial chart with user score data
+@param {object} dataUserScore - An object containing user score data
+@param {number} dataUserScore.score - User score value
+@returns {JSX.Element} - Returns a React component for displaying a radial chart
+*/
+
 import { useEffect, useRef } from "react";
 import { radialLogic } from '../../utils/radialLogic';
 import { updateRadialDimensions } from "../../utils/responsiveCharts/updateRadialDimensions";

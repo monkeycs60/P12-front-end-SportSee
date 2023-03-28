@@ -1,3 +1,15 @@
+/**
+RadarChart component displays a radar chart with user performance data
+@param {object} dataUserPerformance - An object containing user performance data
+@param {number} dataUserPerformance.cardio - User cardio performance value
+@param {number} dataUserPerformance.energy - User energy performance value
+@param {number} dataUserPerformance.endurance - User endurance performance value
+@param {number} dataUserPerformance.intensity - User intensity performance value
+@param {number} dataUserPerformance.speed - User speed performance value
+@param {number} dataUserPerformance.strength - User strength performance value
+@returns {JSX.Element} - Returns a React component for displaying a radar chart
+*/
+
 import * as d3 from 'd3';
 import { useEffect, useRef } from "react";
 import { radarLogic } from '../../utils/radarLogic';
