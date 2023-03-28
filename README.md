@@ -2,11 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Test change commit - avec OC
-Il s'agit d'une mise à jour de la branche master
-On teste une fonctionnalité git
-salut les gens ça ne marche pas
-hola les gens
+Ceci est un toast pour savoir si le git locally marche
 
 ## Available Scripts
 
