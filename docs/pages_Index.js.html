@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/Index.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/Index.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+@file This file exports the Index component that renders the main dashboard page.
+It fetches data from the API and displays it using various charts and components.
+@author [monkeycs60]
+@see {@link https://github.com/monkeycs60/P12-front-end-SportSee} for the repository of this project.
+*/
+
+import styled from "styled-components";
+import IndexGreetings from "../components/IndexGreetings";
+import {
+  getDataUser,
+  getDataUserActivity,
+  getDataUserAverageSession,
+  getDataUserPerformance,
+  getDataUserScore
+} from "../services/apiService";
+import { useState, useEffect } from "react";
+import BarChart from "../components/charts/BarChart";
+import LineChart from "../components/charts/LineChart";
+import RadialChart from "../components/charts/RadialChart";
+import RadarChart from "../components/charts/RadarChart";
+import Nutriments from "../components/nutriments/Nutriments";
+import {
+  USER_MAIN_DATA,
+  USER_ACTIVITY,
+  USER_AVERAGE_SESSIONS,
+  USER_PERFORMANCE
+} from "../data/data"
+
+/**
+Index component that renders the main dashboard page.
+It fetches data from the API and displays it using various charts and components.
+@component
+*/
+const Index = () => {
+  const [dataUser, setDataUser] = useState(null);
+  const [dataUserActivity, setDataUserActivity] = useState(null);
+  const [dataUserAverageSession, setDataUserAverageSession] = useState(null);
+  const [dataUserPerformance, setDataUserPerformance] = useState(null);
+  const [dataUserScore, setDataUserScore] = useState(null);
+
+  /**
+A hook that fetches data from the API when the component mounts.
+@function
+@async
+*/
+   useEffect(() => {
+ async function fetchData() {
+  try {
+    const [
+      dataFromBack,
+      dataFromBackScore,
+      dataFromBackActivity,
+      dataFromBackAverageSession,
+      dataFromBackPerformance,
+    ] = await Promise.all([
+      getDataUser(18),
+      getDataUserScore(18),
+      getDataUserActivity(18),
+      getDataUserAverageSession(18),
+      getDataUserPerformance(18),
+    ]);
+
+    // Set data from back
+    setDataUser(dataFromBack);
+    setDataUserScore(dataFromBackScore);
+    setDataUserActivity(dataFromBackActivity);
+    setDataUserAverageSession(dataFromBackAverageSession);
+    setDataUserPerformance(dataFromBackPerformance);
+
+    // Set mocked data from data.js
+    // setDataUser(USER_MAIN_DATA);
+    // setDataUserScore(USER_MAIN_DATA);
+    // setDataUserActivity(USER_ACTIVITY);
+    // setDataUserAverageSession(USER_AVERAGE_SESSIONS);
+    // setDataUserPerformance(USER_PERFORMANCE);
+
+  } catch (error) {
+    alert("Problème lors de la connexion avec la base de données");
+  }
+}
+  fetchData();
+}, []);
+
+  return (
+    &lt;IndexStyle>
+      &lt;IndexGreetings dataUser={dataUser} />
+      &lt;div className="all-data-container">
+        &lt;div className="chart-container">
+        &lt;BarChart className="bar-chart" dataUserActivity={dataUserActivity} />
+          &lt;div className="lower-charts">
+          &lt;LineChart dataUserAverageSession={dataUserAverageSession} />     
+          &lt;RadarChart dataUserPerformance={dataUserPerformance} />
+          &lt;RadialChart dataUserScore={dataUserScore} />
+          &lt;/div>
+        &lt;/div>
+        &lt;Nutriments dataUser={dataUser} />
+      &lt;/div>
+    &lt;/IndexStyle>
+  );
+};
+
+export default Index;
+
+const IndexStyle = styled.div`
+  width: calc(100vw - 100px);
+  height: calc(100vh - 70px);
+  background-color: white;
+  padding: 40px 80px;
+  .all-data-container {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    height: 85%;
+    gap: 40px;
+  }
+  .chart-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    height: auto;
+    width: 80%;
+    background: white;
+    margin-top: 30px;
+  }
+  .lower-charts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: 50%;
+    margin: 16px;
+  }
+`;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Index">Index</a></li><li><a href="global.html#barLogic">barLogic</a></li><li><a href="global.html#drawRoundedBar">drawRoundedBar</a></li><li><a href="global.html#formatDate">formatDate</a></li><li><a href="global.html#formatTooltipContent">formatTooltipContent</a></li><li><a href="global.html#getDataUser">getDataUser</a></li><li><a href="global.html#getDataUserActivity">getDataUserActivity</a></li><li><a href="global.html#getDataUserAverageSession">getDataUserAverageSession</a></li><li><a href="global.html#getDataUserPerformance">getDataUserPerformance</a></li><li><a href="global.html#getDataUserScore">getDataUserScore</a></li><li><a href="global.html#handleMouseMove">handleMouseMove</a></li><li><a href="global.html#handleMouseOut">handleMouseOut</a></li><li><a href="global.html#handleMouseOver">handleMouseOver</a></li><li><a href="global.html#hideTooltip">hideTooltip</a></li><li><a href="global.html#lineLogic">lineLogic</a></li><li><a href="global.html#radarLogic">radarLogic</a></li><li><a href="global.html#radialLogic">radialLogic</a></li><li><a href="global.html#showTooltip">showTooltip</a></li><li><a href="global.html#updateBarDimensions">updateBarDimensions</a></li><li><a href="global.html#updateGradient">updateGradient</a></li><li><a href="global.html#updateLineDimensions">updateLineDimensions</a></li><li><a href="global.html#updateRadarDimensions">updateRadarDimensions</a></li><li><a href="global.html#updateRadialDimensions">updateRadialDimensions</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Mar 28 2023 17:25:16 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
