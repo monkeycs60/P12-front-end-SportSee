@@ -46,20 +46,21 @@ A hook that fetches data from the API when the component mounts.
 */
    useEffect(() => {
  async function fetchData() {
-  try {
-    const [
-      dataFromBack,
-      dataFromBackScore,
-      dataFromBackActivity,
-      dataFromBackAverageSession,
-      dataFromBackPerformance,
-    ] = await Promise.all([
-      getDataUser(18),
-      getDataUserScore(18),
-      getDataUserActivity(18),
-      getDataUserAverageSession(18),
-      getDataUserPerformance(18),
-    ]);
+ try {
+//   const [
+//     dataFromBack,
+//     dataFromBackScore,
+//     dataFromBackActivity,
+//     dataFromBackAverageSession,
+//     dataFromBackPerformance,
+//   ] = await Promise.all([
+//     getDataUser(18),
+//     getDataUserScore(18),
+//     getDataUserActivity(18),
+//     getDataUserAverageSession(18),
+//     getDataUserPerformance(18),
+//   ]);
+// }
 
     // Set data from back
     // setDataUser(dataFromBack);
