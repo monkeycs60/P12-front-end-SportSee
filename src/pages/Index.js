@@ -62,18 +62,18 @@ A hook that fetches data from the API when the component mounts.
     ]);
 
     // Set data from back
-    setDataUser(dataFromBack);
-    setDataUserScore(dataFromBackScore);
-    setDataUserActivity(dataFromBackActivity);
-    setDataUserAverageSession(dataFromBackAverageSession);
-    setDataUserPerformance(dataFromBackPerformance);
+    // setDataUser(dataFromBack);
+    // setDataUserScore(dataFromBackScore);
+    // setDataUserActivity(dataFromBackActivity);
+    // setDataUserAverageSession(dataFromBackAverageSession);
+    // setDataUserPerformance(dataFromBackPerformance);
 
     // Set mocked data from data.js
-    // setDataUser(USER_MAIN_DATA);
-    // setDataUserScore(USER_MAIN_DATA);
-    // setDataUserActivity(USER_ACTIVITY);
-    // setDataUserAverageSession(USER_AVERAGE_SESSIONS);
-    // setDataUserPerformance(USER_PERFORMANCE);
+    setDataUser(USER_MAIN_DATA);
+    setDataUserScore(USER_MAIN_DATA);
+    setDataUserActivity(USER_ACTIVITY);
+    setDataUserAverageSession(USER_AVERAGE_SESSIONS);
+    setDataUserPerformance(USER_PERFORMANCE);
 
   } catch (error) {
     alert("Problème lors de la connexion avec la base de données");
